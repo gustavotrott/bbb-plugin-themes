@@ -1,0 +1,214 @@
+/*
+ * Moodle: the colours, type and shapes of the Moodle Design System
+ * (https://design.moodle.com), so a BigBlueButton room opened from a Moodle
+ * course looks like part of the course. Moodle blue icon bar, white panels on
+ * a light gray stage, Noto Sans, 8px corners and the system's soft shadows.
+ *
+ * Token values: --mds-color-* primitives and the semantic tokens they map to
+ * (bg.interactive.primary = blue.500, text.default = gray.900, ...).
+ */
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap");
+
+:root {
+  /* Moodle Design System primitives */
+  --mds-blue-50: #E7F0F9;
+  --mds-blue-100: #CFE2F2;
+  --mds-blue-200: #9FC4E5;
+  --mds-blue-500: #0F6CBF;
+  --mds-blue-600: #0C5699;
+  --mds-blue-700: #094173;
+  --mds-gray-100: #F8F9FA;
+  --mds-gray-200: #E9ECEF;
+  --mds-gray-300: #DEE2E6;
+  --mds-gray-400: #CED4DA;
+  --mds-gray-600: #6A737B;
+  --mds-gray-700: #495057;
+  --mds-gray-900: #1D2125;
+  --mds-orange-500: #FF7518;
+  --mds-green-500: #357A32;
+  --mds-red-500: #CA3120;
+  --mds-shadow-sm: 0 2px 4px rgba(0, 0, 0, .08);
+  --mds-shadow-md: 0 8px 16px rgba(0, 0, 0, .15);
+  --mds-shadow-lg: 0 16px 48px rgba(0, 0, 0, .17);
+
+  --theme-background: var(--mds-gray-200);
+  --theme-stage-text: var(--mds-gray-900);
+  --theme-tile: #fff;
+  --theme-tile-hover: var(--mds-blue-50);
+  --theme-nav: var(--mds-blue-500);
+  --theme-nav-active: var(--mds-blue-700);
+  --theme-nav-icon: #fff;
+  --theme-nav-icon-active: #fff;
+  --theme-nav-hover: var(--mds-blue-600);
+  --theme-nav-separator: rgba(255, 255, 255, .25);
+  --theme-nav-marker: var(--mds-orange-500);
+  --theme-primary: var(--mds-blue-500);
+  --theme-primary-soft: rgba(15, 108, 191, .2);
+  --theme-on-primary: #fff;
+  --theme-danger: var(--mds-red-500);
+  --theme-moderator: var(--mds-orange-500);
+  --theme-talking: #4C9A48;
+  --theme-talking-soft: rgba(53, 122, 50, .28);
+  --theme-panel: #fff;
+  --theme-text: var(--mds-gray-900);
+  --theme-muted: var(--mds-gray-600);
+  --theme-line: var(--mds-gray-300);
+  --theme-input: #fff;
+  --theme-input-border: var(--mds-gray-400);
+  --theme-hover: var(--mds-gray-100);
+  --theme-hover-strong: var(--mds-gray-200);
+  --theme-soft: var(--mds-gray-100);
+  --theme-soft-text: var(--mds-gray-700);
+  --theme-scroll: var(--mds-gray-400);
+  --theme-badge-ring: #fff;
+  --theme-button-bg: #fff;
+  --theme-button-icon: var(--mds-gray-900);
+  --theme-button-hover: var(--mds-gray-200);
+  --theme-button-shadow: 0 0 0 1px var(--mds-gray-400);
+  --theme-shadow: var(--mds-shadow-md);
+  --theme-font: "Noto Sans", "Helvetica Neue", Arial, sans-serif;
+
+  /* border radius tokens: md 8, sm 6, lg 12 */
+  --theme-radius: 8px;
+  --theme-radius-sm: 6px;
+  --theme-radius-bubble: 12px;
+  --theme-radius-modal: 12px;
+  --theme-nav-radius: 8px;
+  --theme-action-size: 40px;
+  --theme-action-radius: 8px;
+}
+
+/* Moodle's focus ring: a solid blue outline that's always visible */
+:is(button, a, [role="button"], [role="menuitem"], [role="tab"]):focus-visible {
+  outline: 3px solid var(--mds-blue-500) !important;
+  outline-offset: 2px !important;
+}
+
+/* ---- Icon bar: Moodle blue, active item darker with the brand orange mark ---- */
+.bbb-navigation__list {
+  background-image: none !important;
+}
+
+.bbb-navigation__item--active::after {
+  right: auto;
+  left: calc((var(--theme-nav-button) - 100cqw) / 2);
+  border-radius: 0 3px 3px 0;
+  width: 4px;
+}
+
+[dir="rtl"] .bbb-navigation__item--active::after {
+  left: auto;
+  right: calc((var(--theme-nav-button) - 100cqw) / 2);
+}
+
+.bbb-navigation__logo img {
+  border-radius: 8px;
+}
+
+/* ---- Sidebar: a white drawer with Moodle's gray borders ---- */
+.bbb-sidebar-content {
+  border-right: 1px solid var(--theme-line);
+  box-sizing: border-box;
+}
+
+.bbb-panel-header__title {
+  font-size: 1.125rem !important;
+  font-weight: 700 !important;
+  color: var(--mds-gray-900) !important;
+}
+
+/* ---- Stage: cards on the gray page ---- */
+.bbb-presentation__content {
+  box-shadow: var(--mds-shadow-sm), 0 0 0 1px var(--mds-gray-300);
+}
+
+.bbb-presentation-toolbar {
+  background: #fff !important;
+  border-top: 1px solid var(--theme-line);
+}
+
+.bbb-webcam {
+  border-radius: 8px !important;
+  overflow: hidden;
+  box-shadow: var(--mds-shadow-sm);
+}
+
+.bbb-webcam::after {
+  border-radius: 8px !important;
+}
+
+.bbb-webcam__name {
+  border-radius: 6px !important;
+  background: rgba(255, 255, 255, .94) !important;
+  color: var(--theme-text) !important;
+  font-weight: 600;
+}
+
+.bbb-webcam__name * {
+  color: var(--theme-text) !important;
+}
+
+/* ---- Top bar: secondary buttons like Moodle's btn-secondary ---- */
+.bbb-navbar__title {
+  font-weight: 700 !important;
+}
+
+.bbb-options-button > .bbb-button__icon {
+  border-radius: 6px !important;
+  box-shadow: var(--theme-button-shadow);
+  color: var(--theme-button-icon) !important;
+}
+
+.bbb-leave-button button.bbb-button--danger,
+button.bbb-connection-status-button > span.bbb-button__icon {
+  border-radius: 6px !important;
+}
+
+.bbb-talking-indicator__item {
+  border-radius: 6px !important;
+}
+
+/* ---- Chat: own messages in the primary light tint ---- */
+.bbb-chat-message .chat-message-content {
+  background: var(--mds-gray-100) !important;
+  border: 1px solid var(--mds-gray-200);
+}
+
+.bbb-chat-message--own .chat-message-content {
+  background: var(--mds-blue-50) !important;
+  border-color: var(--mds-blue-100);
+}
+
+.bbb-chat-message__name {
+  font-weight: 700 !important;
+}
+
+/* ---- Action bar ---- */
+.bbb-actions-bar .bbb-button--primary > .bbb-button__icon {
+  box-shadow: none !important;
+}
+
+.bbb-actions-bar .bbb-button--primary:hover > .bbb-button__icon {
+  background: var(--mds-blue-600) !important;
+}
+
+/* ---- Menus, modals, notifications: Moodle's elevation styles ---- */
+.MuiPaper-root.MuiMenu-paper {
+  border: 1px solid var(--mds-gray-300);
+}
+
+.ReactModal__Content {
+  box-shadow: var(--mds-shadow-lg) !important;
+}
+
+.ReactModal__Content > div:first-child > p {
+  font-weight: 700 !important;
+  text-transform: none !important;
+  color: var(--mds-gray-900) !important;
+}
+
+/* Alerts like Moodle's: tinted background, coloured left edge */
+.Toastify__toast {
+  border: 1px solid var(--mds-blue-200);
+  border-left: 4px solid var(--mds-blue-500) !important;
+}

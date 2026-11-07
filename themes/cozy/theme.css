@@ -1,0 +1,202 @@
+/*
+ * Cozy: beige, earthy tones, soft sage green and round corners.
+ * A warm, less institutional look (think Notion, Headspace, a café menu).
+ */
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap");
+
+:root {
+  --theme-background: #EDE4D6;
+  --theme-stage-text: #4A3B2F;
+  --theme-tile: rgba(74, 59, 47, .08);
+  --theme-tile-hover: rgba(74, 59, 47, .15);
+  --theme-nav: #66795A;
+  --theme-nav-active: rgba(255, 250, 240, .2);
+  --theme-nav-icon: #F6EFE3;
+  --theme-nav-icon-active: #fff;
+  --theme-nav-hover: rgba(255, 250, 240, .1);
+  --theme-nav-separator: rgba(255, 250, 240, .2);
+  --theme-nav-marker: #E9C892;
+  --theme-primary: #6B8A5A;
+  --theme-primary-soft: rgba(107, 138, 90, .22);
+  --theme-on-primary: #fff;
+  --theme-danger: #C0573E;
+  --theme-moderator: #D9A441;
+  --theme-talking: #7FA36A;
+  --theme-talking-soft: rgba(127, 163, 106, .32);
+  --theme-panel: #FBF7F0;
+  --theme-text: #3F3228;
+  --theme-muted: #9A8A78;
+  --theme-line: #E8DCCB;
+  --theme-input: #FFFDF9;
+  --theme-input-border: #DCCDB8;
+  --theme-hover: #F3ECE0;
+  --theme-hover-strong: #EBE1D2;
+  --theme-soft: #F1E8DA;
+  --theme-soft-text: #7A6857;
+  --theme-scroll: #D6C7B2;
+  --theme-badge-ring: #FBF7F0;
+  --theme-button-bg: #FBF7F0;
+  --theme-button-icon: #5C4A3C;
+  --theme-button-hover: #EFE5D6;
+  --theme-button-shadow: 0 1px 2px rgba(74, 59, 47, .12), 0 0 0 1px #E3D6C3;
+  --theme-shadow: 0 10px 30px rgba(74, 59, 47, .16);
+  --theme-font: "Nunito Sans", "Source Sans Pro", system-ui, sans-serif;
+
+  --theme-radius: 16px;
+  --theme-radius-sm: 12px;
+  --theme-radius-bubble: 18px;
+  --theme-radius-modal: 24px;
+  --theme-nav-radius: 14px;
+  --theme-action-size: 44px;
+  --theme-action-radius: 50%;
+}
+
+/* ---- The scene ---- */
+body,
+#layout > div:not([data-test]),
+.bbb-navbar,
+.bbb-actions-bar {
+  background: transparent !important;
+}
+
+/* The scene (scene.svg): linen with soft blots of color and a few branches
+   near the corners. Replace scene.svg with any image and rebuild to change it. */
+body {
+  background: url(./scene.svg) center / cover no-repeat fixed, var(--theme-background) !important;
+}
+
+/* Logo tile and nav: warm cream instead of plain white */
+.bbb-navigation__logo img {
+  background: #FBF7F0;
+  border-radius: 14px;
+}
+
+/* Panel titles in a soft serif, like a cookbook */
+.bbb-panel-header__title,
+.ReactModal__Content > div:first-child > p {
+  font-family: "Fraunces", Georgia, serif !important;
+  font-weight: 600 !important;
+  letter-spacing: 0;
+  text-transform: none !important;
+}
+
+/* Sidebar: rounded on the right, so it reads as a card lying on the table */
+.bbb-sidebar-content__panel,
+.bbb-sidebar-content__panel > div {
+  border-radius: 0 22px 22px 0 !important;
+}
+
+.bbb-sidebar-content {
+  background: transparent !important;
+}
+
+.bbb-sidebar-content__panel {
+  background: var(--theme-panel) !important;
+  box-shadow: 4px 0 24px rgba(74, 59, 47, .08) !important;
+}
+
+/* Cameras: rounded tiles, cream name tags */
+.bbb-webcam,
+.bbb-webcam video {
+  border-radius: 18px !important;
+  overflow: hidden;
+}
+
+.bbb-webcam::after {
+  border-radius: 18px !important;
+  border-color: rgba(255, 250, 240, .35) !important;
+}
+
+.bbb-webcam__name {
+  border-radius: 999px !important;
+  background: rgba(251, 247, 240, .92) !important;
+  color: var(--theme-text) !important;
+  padding: 0 10px !important;
+  font-weight: 600;
+}
+
+.bbb-webcam__name * {
+  color: var(--theme-text) !important;
+}
+
+/* Presentation: a soft shadow, no hard edges */
+.bbb-presentation__content {
+  box-shadow: 0 12px 40px rgba(74, 59, 47, .18);
+}
+
+.bbb-presentation-toolbar {
+  background: #F6EFE4 !important;
+}
+
+/* Top bar: terracotta leave, sage connection, cream options */
+.bbb-leave-button .bbb-button__icon,
+[data-test="leaveMeetingDropdown"] .bbb-button__icon {
+  background: var(--theme-danger) !important;
+  border-radius: 12px !important;
+}
+
+.bbb-connection-status-button .bbb-button__icon {
+  background: var(--theme-primary) !important;
+  border-radius: 12px !important;
+}
+
+.bbb-options-button > .bbb-button__icon {
+  border-radius: 12px !important;
+}
+
+/* Talking indicator (names above the cameras) */
+.bbb-talking-indicator__item {
+  border-radius: 999px !important;
+  background: var(--theme-primary) !important;
+}
+
+/* Chat: own messages in sage, others in oat */
+.bbb-chat-message .chat-message-content {
+  background: var(--theme-soft) !important;
+}
+
+.bbb-chat-message--own .chat-message-content {
+  background: #E3EAD9 !important;
+}
+
+/* Avatars: the client's bright colors, toned down to earthy hues */
+.bbb-avatar:not(:has(img)) {
+  filter: saturate(.62) brightness(1.04);
+}
+
+/* Menus, modals, notifications on cream paper */
+.MuiPaper-root.MuiMenu-paper,
+.ReactModal__Content,
+.Toastify__toast {
+  background-color: var(--theme-panel) !important;
+}
+
+.ReactModal__Content > div:first-child,
+.ReactModal__Content > div:last-child {
+  background-color: var(--theme-panel) !important;
+}
+
+[role="menu"] [role="menuitem"]:hover {
+  background-color: var(--theme-hover) !important;
+}
+
+/* Inputs: warm white */
+.bbb-chat-form__input,
+.bbb-user-list__search,
+textarea,
+input:not([type="checkbox"]):not([type="radio"]):not([type="range"]) {
+  background-color: var(--theme-input) !important;
+}
+
+/* Top bar: terracotta leave and sage connection (the client's bright red and green) */
+.bbb-leave-button button.bbb-button--danger,
+.bbb-leave-button button.bbb-button--danger > .bbb-button__icon {
+  background-color: var(--theme-danger) !important;
+  border-color: var(--theme-danger) !important;
+}
+
+button.bbb-connection-status-button.bbb-button--success,
+button.bbb-connection-status-button.bbb-button--success > span.bbb-button__icon {
+  background-color: var(--theme-primary) !important;
+  border-color: var(--theme-primary) !important;
+}

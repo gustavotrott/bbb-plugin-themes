@@ -1,0 +1,90 @@
+/*
+ * Midnight: the whole client in dark mode, like Discord, Zoom and Slack at
+ * night. Neutral graphite surfaces, a calm blue accent, easy on the eyes in
+ * long evening meetings.
+ */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+:root {
+  --theme-background: #0D0F12;
+  --theme-stage-text: #E6E8EB;
+  --theme-tile: #1E2127;
+  --theme-tile-hover: #2A2E36;
+  --theme-nav: #15171B;
+  --theme-nav-active: #262A32;
+  --theme-nav-icon: #A9B0BA;
+  --theme-nav-icon-active: #fff;
+  --theme-nav-hover: #1F2227;
+  --theme-nav-separator: #262A31;
+  --theme-nav-marker: #5B8CFF;
+  --theme-primary: #4C7DFF;
+  --theme-primary-soft: rgba(76, 125, 255, .28);
+  --theme-on-primary: #fff;
+  --theme-danger: #F2555A;
+  --theme-moderator: #F5B700;
+  --theme-talking: #3DD68C;
+  --theme-talking-soft: rgba(61, 214, 140, .28);
+  --theme-panel: #16181C;
+  --theme-panel-raised: #1D2025;
+  --theme-text: #E6E8EB;
+  --theme-muted: #8B929C;
+  --theme-line: #262A31;
+  --theme-input: #1E2127;
+  --theme-input-border: #30353D;
+  --theme-hover: #1D2025;
+  --theme-hover-strong: #262A31;
+  --theme-soft: #22252B;
+  --theme-soft-text: #A9B0BA;
+  --theme-own-bubble: #1F2B47;
+  --theme-scroll: #3A3F47;
+  --theme-badge-ring: #16181C;
+  --theme-button-bg: #23262D;
+  --theme-button-icon: #E6E8EB;
+  --theme-button-hover: #2E323A;
+  --theme-button-shadow: 0 0 0 1px #2E323A;
+  --theme-shadow: 0 10px 30px rgba(0, 0, 0, .5);
+  --theme-font: "Inter", system-ui, sans-serif;
+
+  --theme-radius: 10px;
+  --theme-radius-sm: 8px;
+  --theme-radius-bubble: 12px;
+  --theme-radius-modal: 14px;
+  --theme-nav-radius: 10px;
+}
+
+.bbb-navigation {
+  border-right: 1px solid var(--theme-line);
+  box-sizing: border-box;
+}
+
+.bbb-sidebar-content {
+  border-right: 1px solid var(--theme-line);
+  box-sizing: border-box;
+}
+
+.bbb-navigation__logo img {
+  background: #fff;
+}
+
+/* Cameras and presentation on the dark stage */
+.bbb-webcam {
+  border-radius: 12px !important;
+  overflow: hidden;
+}
+
+.bbb-webcam::after {
+  border-radius: 12px !important;
+}
+
+.bbb-presentation__content {
+  box-shadow: 0 0 0 1px #23262D, 0 12px 40px rgba(0, 0, 0, .45);
+}
+
+/* Muted microphone: a red tile, readable on the dark buttons */
+:is(.bbb-mute-toggle--muted, .bbb-video-toggle--off) > .bbb-button__icon {
+  background: rgba(242, 85, 90, .14) !important;
+}
+
+.bbb-actions-bar .bbb-button--default:hover > .bbb-button__icon {
+  color: var(--theme-button-icon) !important;
+}

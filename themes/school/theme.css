@@ -1,0 +1,251 @@
+/*
+ * School: for K-12 classes, from the first grades to high school. Friendly
+ * without looking childish, so teenagers and teachers are fine with it too.
+ *
+ * - Lexend, a typeface designed to make reading easier (also for dyslexia),
+ *   a little larger than the client's default.
+ * - Each tool in the icon bar has its own colour (chat green, people yellow,
+ *   notes pink, polls orange...), so younger pupils can say "the green one".
+ * - Bigger buttons and clear focus rings for small hands and keyboards.
+ * - A calm, light stage on graph paper, and raised hands that stand out.
+ */
+@import url("https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&display=swap");
+
+:root {
+  --theme-background: #F7F6F1;
+  --theme-stage-text: #1E2A44;
+  --theme-tile: #fff;
+  --theme-tile-hover: #EEF1FD;
+  --theme-nav: #1E2A44;
+  --theme-nav-active: #fff;
+  --theme-nav-icon: #fff;
+  --theme-nav-icon-active: #1E2A44;
+  --theme-nav-hover: rgba(255, 255, 255, .10);
+  --theme-nav-separator: rgba(255, 255, 255, .18);
+  --theme-nav-marker: #FACC15;
+  --theme-primary: #3B5BDB;
+  --theme-primary-soft: rgba(59, 91, 219, .22);
+  --theme-on-primary: #fff;
+  --theme-danger: #E03131;
+  --theme-moderator: #FACC15;
+  --theme-talking: #2FB344;
+  --theme-talking-soft: rgba(47, 179, 68, .3);
+  --theme-panel: #fff;
+  --theme-text: #1E2A44;
+  --theme-muted: #6B7489;
+  --theme-line: #E6E8EF;
+  --theme-input: #fff;
+  --theme-input-border: #CDD2DE;
+  --theme-hover: #F3F5FA;
+  --theme-hover-strong: #E8ECF6;
+  --theme-soft: #F1F3F8;
+  --theme-soft-text: #47506A;
+  --theme-scroll: #C9CFDC;
+  --theme-badge-ring: #fff;
+  --theme-button-bg: #fff;
+  --theme-button-icon: #1E2A44;
+  --theme-button-hover: #EEF1FD;
+  --theme-button-shadow: 0 0 0 1.5px #D5DAE5, 0 2px 0 #D5DAE5;
+  --theme-shadow: 0 10px 28px rgba(30, 42, 68, .16);
+  --theme-font: "Lexend", "Segoe UI", system-ui, sans-serif;
+
+  --theme-radius: 12px;
+  --theme-radius-sm: 10px;
+  --theme-radius-bubble: 14px;
+  --theme-radius-modal: 18px;
+  --theme-nav-radius: 12px;
+  --theme-action-size: 46px;
+  --theme-action-radius: 14px;
+}
+
+/* ---- Stage: graph paper ---- */
+body,
+#layout > div:not([data-test]),
+.bbb-navbar,
+.bbb-actions-bar {
+  background: transparent !important;
+}
+
+body {
+  background:
+    linear-gradient(rgba(59, 91, 219, .07) 1px, transparent 1px) 0 0 / 24px 24px fixed,
+    linear-gradient(90deg, rgba(59, 91, 219, .07) 1px, transparent 1px) 0 0 / 24px 24px fixed,
+    #F7F6F1 !important;
+}
+
+/* A little larger text, easier to read */
+.bbb-chat-message .chat-message-content,
+.bbb-user-list-item {
+  font-size: 15px !important;
+}
+
+:is(button, a, [role="button"], [role="menuitem"], [role="tab"]):focus-visible {
+  outline: 3px solid #FACC15 !important;
+  outline-offset: 2px !important;
+}
+
+.bbb-panel-header__title {
+  font-weight: 700 !important;
+  font-size: 1.2rem !important;
+}
+
+.bbb-navbar__title {
+  font-weight: 600 !important;
+}
+
+/* ---- Icon bar: every tool has its colour ---- */
+.bbb-navigation__list {
+  background-image: none !important;
+}
+
+.bbb-navigation__item {
+  --tool: #fff;
+}
+
+.bbb-navigation__item:has(.icon-bbb-profile) { --tool: #FF8787; }
+.bbb-navigation__item:has(.icon-bbb-user_list) { --tool: #FFD43B; }
+.bbb-navigation__item:has(.icon-bbb-group_chat) { --tool: #51CF66; }
+.bbb-navigation__item:has(.icon-bbb-shared_notes) { --tool: #F783AC; }
+.bbb-navigation__item:has(.icon-bbb-widgets) { --tool: #4DABF7; }
+.bbb-navigation__item:has(.icon-bbb-rooms) { --tool: #B197FC; }
+.bbb-navigation__item:has(.icon-bbb-polling) { --tool: #FFA94D; }
+.bbb-navigation__item:has(.icon-bbb-time) { --tool: #3BC9DB; }
+.bbb-navigation__item:has(.icon-bbb-learning_dashboard) { --tool: #A9E34B; }
+.bbb-navigation__item:has(.icon-bbb-settings) { --tool: #CED4DA; }
+
+.bbb-navigation__item i {
+  color: var(--tool) !important;
+}
+
+/* Active: the tile fills with the tool's colour */
+.bbb-navigation__item--active {
+  background: var(--tool) !important;
+  box-shadow: 0 3px 0 rgba(0, 0, 0, .25);
+}
+
+.bbb-navigation__item--active i {
+  color: var(--theme-nav) !important;
+}
+
+.bbb-navigation__item--active::after {
+  display: none;
+}
+
+.bbb-navigation__logo img {
+  border-radius: 12px;
+}
+
+/* ---- Sidebar ---- */
+.bbb-sidebar-content {
+  border-right: 1px solid var(--theme-line);
+  box-sizing: border-box;
+}
+
+/* Raised hands: a yellow row the teacher can't miss */
+[data-test="raisedHandsListItem"] {
+  background: #FFF6CC !important;
+  border-radius: 12px !important;
+}
+
+[data-test="raisedHandsListItem"] .bbb-avatar {
+  background: #FACC15 !important;
+  color: #1E2A44 !important;
+}
+
+/* ---- Chat ---- */
+.bbb-chat-message .chat-message-content {
+  background: var(--theme-soft) !important;
+}
+
+.bbb-chat-message--own .chat-message-content {
+  background: #E7ECFD !important;
+}
+
+.bbb-chat-message__name {
+  font-weight: 700 !important;
+}
+
+.bbb-chat-form__input {
+  border-width: 2px !important;
+}
+
+/* ---- Stage cards ---- */
+.bbb-presentation__content {
+  box-shadow: 0 0 0 1px #E1E4EC, 0 6px 18px rgba(30, 42, 68, .10);
+}
+
+.bbb-presentation-toolbar {
+  background: #fff !important;
+  border-top: 1px solid var(--theme-line);
+}
+
+.bbb-webcam {
+  border-radius: 14px !important;
+  overflow: hidden;
+  box-shadow: 0 0 0 3px #fff, 0 6px 16px rgba(30, 42, 68, .16);
+}
+
+.bbb-webcam::after {
+  border-radius: 14px !important;
+}
+
+.bbb-webcam--talking::after {
+  border: 4px solid var(--theme-talking) !important;
+}
+
+.bbb-webcam__name {
+  border-radius: 8px !important;
+  background: #fff !important;
+  color: var(--theme-text) !important;
+  font-weight: 600;
+}
+
+.bbb-webcam__name * {
+  color: var(--theme-text) !important;
+}
+
+/* ---- Action bar: buttons that press down ---- */
+.bbb-actions-bar .bbb-button__icon > i {
+  font-size: 22px !important;
+}
+
+.bbb-actions-bar .bbb-button--circle:active > .bbb-button__icon {
+  transform: translateY(2px);
+}
+
+.bbb-actions-bar .bbb-button--primary > .bbb-button__icon {
+  box-shadow: 0 2px 0 #2B44AA !important;
+}
+
+:is(.bbb-mute-toggle--muted, .bbb-video-toggle--off) > .bbb-button__icon {
+  background: #FFECEC !important;
+  color: #C92A2A !important;
+  box-shadow: 0 0 0 1.5px #FFC9C9, 0 2px 0 #FFC9C9 !important;
+}
+
+/* ---- Top bar ---- */
+.bbb-options-button > .bbb-button__icon {
+  box-shadow: var(--theme-button-shadow);
+  color: var(--theme-button-icon) !important;
+}
+
+.bbb-talking-indicator__item {
+  border-radius: 10px !important;
+  font-weight: 600;
+}
+
+/* ---- Menus, modals, notifications ---- */
+[role="menu"] [role="menuitem"] {
+  border-radius: 8px;
+  margin: 2px 6px;
+}
+
+.ReactModal__Content > div:first-child > p {
+  font-weight: 700 !important;
+  text-transform: none !important;
+}
+
+.Toastify__toast {
+  border: 1px solid var(--theme-line);
+  border-left: 6px solid var(--theme-primary) !important;
+}

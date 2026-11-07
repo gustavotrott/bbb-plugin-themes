@@ -1,0 +1,230 @@
+/*
+ * Dark panels for the dark themes. The client draws its panels, menus and
+ * modals in fixed light colors (styled-components, not CSS variables), and its
+ * own dark mode left the screen blank on the test server, so this file repaints
+ * them from the theme palette: --theme-panel, --theme-text, --theme-muted,
+ * --theme-line, --theme-soft, --theme-hover...
+ */
+
+/* ---- Sidebar panel: text ---- */
+.bbb-sidebar-content__panel,
+.bbb-sidebar-content__panel :is(span, p, div, label, h1, h2, h3, h4, li, strong, em, small, a, legend, th, td):not(.bbb-avatar, .bbb-avatar *, .bbb-button--primary, .bbb-button--primary *) {
+  color: var(--theme-text) !important;
+}
+
+.bbb-sidebar-content__panel i:not(.bbb-avatar *, .bbb-button--primary *),
+.bbb-sidebar-content__panel [data-test="userNameSubs"],
+.bbb-sidebar-content__panel [data-test="userNameSubs"] *,
+.bbb-sidebar-content__panel [data-test="typingIndicator"],
+.bbb-sidebar-content__panel [data-test="typingIndicator"] * {
+  color: var(--theme-muted) !important;
+}
+
+.bbb-sidebar-content__panel hr {
+  border-color: var(--theme-line) !important;
+  background: var(--theme-line) !important;
+}
+
+/* ---- Sidebar panel: surfaces ---- */
+
+/*
+ * Every box in the panel goes transparent, so the panel color shows through:
+ * the client paints footers, list rows and its "scroll shadows" (white
+ * gradients) in fixed light colors. No !important, so the explicit surfaces
+ * below (bubbles, fields, buttons) still win. Avatars keep their colors.
+ */
+.bbb-sidebar-content__panel div:not(.bbb-avatar, .bbb-avatar *, #chat-list, [data-test="raisedHandRank"]) {
+  background-color: transparent;
+  background-image: none;
+}
+
+.bbb-sidebar-content,
+.bbb-sidebar-content__panel,
+.bbb-sidebar-content__panel > div,
+.bbb-chat-form {
+  background-color: var(--theme-panel) !important;
+}
+
+.bbb-sidebar-content__panel .chat-message-content {
+  background-color: var(--theme-soft) !important;
+}
+
+/* The bubble has inner boxes with their own light background */
+.bbb-sidebar-content__panel .chat-message-content :is(div, p, span) {
+  background-color: transparent !important;
+}
+
+.bbb-chat-message--own .chat-message-content {
+  background-color: var(--theme-own-bubble, var(--theme-hover-strong)) !important;
+}
+
+.bbb-sidebar-content__panel :is(input, textarea, select),
+.bbb-chat-form__input,
+.bbb-user-list__search {
+  background-color: var(--theme-input) !important;
+  border-color: var(--theme-input-border) !important;
+  color: var(--theme-text) !important;
+}
+
+.bbb-sidebar-content__panel button:not(.bbb-button--primary):not([data-test="sendMessageButton"]):not(:is([data-test="saveSettingsButton"], [data-test="startPoll"], [data-test="confirmEndMeeting"], [data-test="confirmButton"], [data-test="button-Cancelar"], [data-test="cancelPollCreation"], [data-test="cancelButton"])) {
+  background-color: var(--theme-input) !important;
+  border-color: var(--theme-input-border) !important;
+  color: var(--theme-text) !important;
+}
+
+.bbb-sidebar-content__panel button:not(.bbb-button--primary):not([data-test="sendMessageButton"]):not(:is([data-test="saveSettingsButton"], [data-test="startPoll"], [data-test="confirmEndMeeting"], [data-test="confirmButton"], [data-test="button-Cancelar"], [data-test="cancelPollCreation"], [data-test="cancelButton"])):hover {
+  background-color: var(--theme-hover-strong) !important;
+}
+
+.bbb-sidebar-content__panel button:disabled:not(.bbb-button--primary) {
+  opacity: .5;
+}
+
+/* Poll panel: the blue info box and the selected tab */
+.bbb-sidebar-content--poll [role="tablist"],
+.bbb-sidebar-content--poll div:has(> button[aria-selected]) {
+  background-color: var(--theme-input) !important;
+  border-color: var(--theme-input-border) !important;
+}
+
+.bbb-sidebar-content--poll div:has(> p):not(:has(button)) {
+  background-color: var(--theme-soft) !important;
+  border-color: var(--theme-line) !important;
+}
+
+/* ---- Menus (user options, audio, options...) ---- */
+.MuiPaper-root.MuiMenu-paper,
+.MuiPaper-root.MuiPopover-paper,
+[role="menu"] {
+  background-color: var(--theme-panel-raised, var(--theme-panel)) !important;
+  color: var(--theme-text) !important;
+}
+
+.MuiPaper-root.MuiMenu-paper {
+  border: 1px solid var(--theme-line);
+}
+
+[role="menu"] :is(li, span, p, div, i, label),
+[role="menuitem"] {
+  color: var(--theme-text) !important;
+}
+
+[role="menu"] [role="menuitem"]:hover,
+[role="menu"] [role="menuitem"]:focus,
+[role="menu"] li.Mui-focusVisible {
+  background-color: var(--theme-hover-strong) !important;
+}
+
+[role="menu"] .Mui-selected,
+[role="menu"] [aria-selected="true"],
+[role="menu"] [aria-checked="true"] {
+  background-color: var(--theme-hover-strong) !important;
+}
+
+[role="menu"] .Mui-selected *,
+[role="menu"] [aria-checked="true"] * {
+  color: var(--theme-text) !important;
+  opacity: 1 !important;
+}
+
+[role="menu"] hr,
+[role="menu"] .MuiDivider-root {
+  border-color: var(--theme-line) !important;
+}
+
+/* ---- Modals (settings, leave, audio...) ---- */
+.ReactModal__Content {
+  background-color: var(--theme-panel-raised, var(--theme-panel)) !important;
+  color: var(--theme-text) !important;
+}
+
+.ReactModal__Content :is(div, header, section, footer, ul, li, form):not(.bbb-avatar, .bbb-avatar *) {
+  background-color: transparent !important;
+}
+
+.ReactModal__Content :is(span, p, div, label, h1, h2, h3, h4, li, strong, small, a, legend, th, td):not(.bbb-button--primary, .bbb-button--primary *) {
+  color: var(--theme-text) !important;
+}
+
+.ReactModal__Content hr {
+  border-color: var(--theme-line) !important;
+  background: var(--theme-line) !important;
+}
+
+.ReactModal__Content :is(input:not([type="checkbox"]):not([type="radio"]):not([type="range"]), textarea, select) {
+  background-color: var(--theme-input) !important;
+  border-color: var(--theme-input-border) !important;
+  color: var(--theme-text) !important;
+}
+
+.ReactModal__Content select option {
+  background-color: var(--theme-panel);
+  color: var(--theme-text);
+}
+
+.ReactModal__Content button:not(.bbb-button--primary):not([data-test="closeModal"]):not(:is([data-test="saveSettingsButton"], [data-test="startPoll"], [data-test="confirmEndMeeting"], [data-test="confirmButton"], [data-test="button-Cancelar"], [data-test="cancelPollCreation"], [data-test="cancelButton"])) {
+  background-color: var(--theme-input) !important;
+  border-color: var(--theme-input-border) !important;
+  color: var(--theme-text) !important;
+}
+
+.ReactModal__Content [data-test="closeModal"] {
+  background: transparent !important;
+  color: var(--theme-muted) !important;
+}
+
+.ReactModal__Content [data-test="closeModal"] svg {
+  filter: invert(.85);
+}
+
+.MuiSwitch-track {
+  background-color: var(--theme-muted) !important;
+}
+
+/* ---- Notifications ---- */
+.Toastify__toast {
+  background-color: var(--theme-panel-raised, var(--theme-panel)) !important;
+  color: var(--theme-text) !important;
+}
+
+.Toastify__toast * {
+  color: var(--theme-text) !important;
+}
+
+/* ---- Presentation toolbar (slide, zoom) ---- */
+.bbb-presentation-toolbar {
+  background-color: var(--theme-panel-raised, var(--theme-panel)) !important;
+  color: var(--theme-text) !important;
+}
+
+.bbb-presentation-toolbar :is(span, i, div, button, select) {
+  color: var(--theme-text) !important;
+}
+
+.bbb-presentation-toolbar button,
+.bbb-presentation-toolbar select {
+  background-color: transparent !important;
+}
+
+/* Menus: the selected item and the section titles use these inline variables */
+[role="menu"] {
+  --color-off-white: var(--theme-hover-strong);
+  --color-gray-dark: var(--theme-text);
+  --color-success: var(--theme-talking);
+}
+
+/* Cancel buttons: outlined on the dark surface, not a white box */
+:is([data-test="button-Cancelar"], [data-test="cancelPollCreation"], [data-test="cancelButton"]) {
+  background-color: transparent !important;
+}
+
+/* Disabled confirm buttons ("Start poll" before choosing a type) */
+:is([data-test="startPoll"], [data-test="saveSettingsButton"]):disabled {
+  background-color: var(--theme-soft) !important;
+  border-color: var(--theme-line) !important;
+  color: var(--theme-muted) !important;
+}
+
+:is([data-test="startPoll"], [data-test="saveSettingsButton"]):disabled * {
+  color: var(--theme-muted) !important;
+}

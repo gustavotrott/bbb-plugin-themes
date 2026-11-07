@@ -1,0 +1,301 @@
+/*
+ * Kids: bright colors, chunky round buttons and a playful rounded font.
+ * Inspired by Duolingo, Khan Academy Kids and toy blocks: every icon in the
+ * icon bar gets its own color, so children find "the green one" for the chat.
+ */
+@import url("https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&display=swap");
+
+:root {
+  --theme-background: #DDF1FF;
+  --theme-stage-text: #2B2A6B;
+  --theme-tile: #fff;
+  --theme-tile-hover: #F1EDFF;
+  --theme-nav: #6A4CF5;
+  --theme-nav-active: #fff;
+  --theme-nav-icon: #fff;
+  --theme-nav-icon-active: #fff;
+  --theme-nav-hover: rgba(255, 255, 255, .14);
+  --theme-nav-separator: rgba(255, 255, 255, .28);
+  --theme-nav-marker: #FFD23F;
+  --theme-primary: #FF7A2F;
+  --theme-primary-soft: rgba(255, 122, 47, .25);
+  --theme-on-primary: #fff;
+  --theme-danger: #FF4D5E;
+  --theme-moderator: #FFC21A;
+  --theme-talking: #22C55E;
+  --theme-talking-soft: rgba(34, 197, 94, .35);
+  --theme-panel: #FFFDF8;
+  --theme-text: #2B2A6B;
+  --theme-muted: #8E8BB5;
+  --theme-line: #ECE7FB;
+  --theme-input: #fff;
+  --theme-input-border: #D9D2F7;
+  --theme-hover: #F4F0FF;
+  --theme-hover-strong: #EAE3FF;
+  --theme-soft: #F1EDFF;
+  --theme-soft-text: #5B4FC4;
+  --theme-scroll: #D1C8F5;
+  --theme-badge-ring: #fff;
+  --theme-button-bg: #fff;
+  --theme-button-icon: #4A3FB8;
+  --theme-button-hover: #F4F0FF;
+  --theme-button-shadow: 0 4px 0 #C4D6EA;
+  --theme-shadow: 0 6px 0 rgba(106, 76, 245, .15), 0 12px 28px rgba(43, 42, 107, .14);
+  --theme-font: "Baloo 2", "Comic Neue", system-ui, sans-serif;
+
+  --theme-radius: 20px;
+  --theme-radius-sm: 14px;
+  --theme-radius-bubble: 20px;
+  --theme-radius-modal: 28px;
+  --theme-nav-radius: 16px;
+  --theme-action-size: 50px;
+  --theme-action-radius: 18px;
+  --reaction-stack-emoji-radius: 50%;
+}
+
+/* ---- The scene ---- */
+body,
+#layout > div:not([data-test]),
+.bbb-navbar,
+.bbb-actions-bar {
+  background: transparent !important;
+}
+
+/* The scene (scene.svg): sky, clouds, a smiling sun and hills with flowers.
+   Replace scene.svg with any image and rebuild to change it. */
+body {
+  background: url(./scene.svg) center bottom / cover no-repeat fixed, #DDF1FF !important;
+}
+
+/* Bigger, bolder text everywhere it matters */
+.bbb-panel-header__title {
+  font-weight: 800 !important;
+  font-size: 1.35rem !important;
+  color: var(--theme-nav) !important;
+}
+
+.bbb-navbar__title {
+  font-weight: 700 !important;
+  font-size: 1.15rem !important;
+}
+
+/* ---- Icon bar: a toy box of colored blocks ---- */
+.bbb-navigation__list {
+  background-image: none !important;
+}
+
+.bbb-navigation__item {
+  --kid: rgba(255, 255, 255, .16);
+  background: var(--kid) !important;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, .18);
+  transition: transform .15s cubic-bezier(.3, 1.6, .5, 1), box-shadow .15s ease;
+}
+
+.bbb-navigation__item:has(.icon-bbb-profile) { --kid: #FF8E72; }
+.bbb-navigation__item:has(.icon-bbb-user_list) { --kid: #FFC21A; }
+.bbb-navigation__item:has(.icon-bbb-group_chat) { --kid: #2BC48A; }
+.bbb-navigation__item:has(.icon-bbb-shared_notes) { --kid: #FF6FA9; }
+.bbb-navigation__item:has(.icon-bbb-widgets) { --kid: #36A9FF; }
+.bbb-navigation__item:has(.icon-bbb-rooms) { --kid: #A56BFF; }
+.bbb-navigation__item:has(.icon-bbb-polling) { --kid: #FF7A2F; }
+.bbb-navigation__item:has(.icon-bbb-time) { --kid: #19C3C3; }
+.bbb-navigation__item:has(.icon-bbb-learning_dashboard) { --kid: #8BD346; }
+.bbb-navigation__item:has(.icon-bbb-settings) { --kid: #9C94D9; }
+
+.bbb-navigation__item:hover {
+  background: var(--kid) !important;
+  transform: translateY(-2px) rotate(-3deg);
+  box-shadow: 0 6px 0 rgba(0, 0, 0, .18);
+}
+
+/* Active: the block pops up with a white outline */
+.bbb-navigation__item--active {
+  background: var(--kid) !important;
+  transform: scale(1.06);
+  box-shadow: 0 0 0 3px #fff, 0 5px 0 3px rgba(0, 0, 0, .18) !important;
+}
+
+.bbb-navigation__item--active::after {
+  display: none;
+}
+
+.bbb-navigation__logo img {
+  border-radius: 18px;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, .18);
+}
+
+/* ---- Action bar: chunky buttons that press down ---- */
+.bbb-actions-bar .bbb-button__icon {
+  transition: transform .12s ease, box-shadow .12s ease, background-color .12s ease !important;
+}
+
+.bbb-actions-bar .bbb-button--circle:hover > .bbb-button__icon {
+  transform: translateY(-2px);
+}
+
+.bbb-actions-bar .bbb-button--circle:active > .bbb-button__icon {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 #C4D6EA !important;
+}
+
+.bbb-actions-bar .bbb-button--primary > .bbb-button__icon {
+  box-shadow: 0 4px 0 #D35C17 !important;
+}
+
+.bbb-actions-bar .bbb-button__icon > i {
+  font-size: 24px !important;
+}
+
+:is(.bbb-mute-toggle--muted, .bbb-video-toggle--off) > .bbb-button__icon {
+  background: #FFE8EA !important;
+  box-shadow: 0 4px 0 #F5B8BF !important;
+}
+
+/* ---- Avatars: stickers with a white border ---- */
+.bbb-avatar {
+  box-shadow: 0 0 0 3px #fff, 0 3px 0 3px rgba(43, 42, 107, .12);
+  font-weight: 700 !important;
+}
+
+.bbb-avatar.bbb-avatar--moderator::before {
+  width: 17px !important;
+  height: 17px !important;
+  top: -8px !important;
+  right: -8px !important;
+  background-size: 11px !important;
+  box-shadow: 0 0 0 2px #fff !important;
+}
+
+/* ---- Cameras: polaroid frames ---- */
+.bbb-webcam {
+  border-radius: 22px !important;
+  overflow: hidden;
+  box-shadow: 0 0 0 4px #fff, 0 6px 0 4px rgba(43, 42, 107, .12);
+}
+
+.bbb-webcam video {
+  border-radius: 22px !important;
+}
+
+.bbb-webcam::after {
+  border-radius: 22px !important;
+  border-color: transparent !important;
+}
+
+.bbb-webcam--talking::after {
+  border: 5px solid var(--theme-talking) !important;
+}
+
+.bbb-webcam__name {
+  border-radius: 999px !important;
+  background: #fff !important;
+  color: var(--theme-text) !important;
+  font-weight: 700;
+  font-size: 13px !important;
+  padding: 0 10px !important;
+}
+
+.bbb-webcam__name * {
+  color: var(--theme-text) !important;
+}
+
+/* ---- Presentation: a white board with a thick frame ---- */
+.bbb-presentation__content {
+  box-shadow: 0 0 0 6px #fff, 0 10px 0 6px rgba(43, 42, 107, .10);
+}
+
+.bbb-presentation-toolbar {
+  background: #fff !important;
+}
+
+/* ---- Sidebar ---- */
+.bbb-sidebar-content__panel {
+  background: var(--theme-panel) !important;
+}
+
+.bbb-chat-message .chat-message-content {
+  background: #fff !important;
+  border: 2px solid var(--theme-line);
+}
+
+.bbb-chat-message--own .chat-message-content {
+  background: #FFF1E2 !important;
+  border-color: #FFD9B8;
+}
+
+.bbb-chat-message__name {
+  font-weight: 800 !important;
+}
+
+.bbb-chat-form__input {
+  border-width: 2px !important;
+  border-radius: 18px !important;
+}
+
+.bbb-user-list__search {
+  border-width: 2px !important;
+  border-radius: 999px !important;
+}
+
+/* Raised hands: a big yellow hand */
+[data-test="raisedHandsListItem"] .bbb-avatar {
+  background: #FFC21A !important;
+}
+
+/* ---- Top bar ---- */
+.bbb-options-button > .bbb-button__icon,
+button.bbb-connection-status-button > span.bbb-button__icon,
+.bbb-leave-button button.bbb-button--danger {
+  border-radius: 14px !important;
+  box-shadow: 0 3px 0 rgba(0, 0, 0, .15) !important;
+}
+
+.bbb-options-button > .bbb-button__icon {
+  background: #fff !important;
+  color: var(--theme-nav) !important;
+}
+
+.bbb-talking-indicator__item {
+  border-radius: 999px !important;
+  font-weight: 700;
+}
+
+/* ---- Menus, modals, notifications ---- */
+.MuiPaper-root.MuiMenu-paper {
+  border: 2px solid var(--theme-line);
+}
+
+[role="menu"] [role="menuitem"] {
+  font-weight: 600;
+  border-radius: 12px;
+  margin: 2px 6px;
+}
+
+.ReactModal__Content {
+  border: 4px solid #fff;
+}
+
+.ReactModal__Content > div:first-child > p {
+  font-weight: 800 !important;
+  font-size: 1.3rem !important;
+  text-transform: none !important;
+  color: var(--theme-nav) !important;
+}
+
+.Toastify__toast {
+  border: 2px solid var(--theme-line) !important;
+  border-left-width: 8px !important;
+  font-weight: 600;
+}
+
+/* Playful bounce when panels and menus open */
+@keyframes kids-pop {
+  0% { transform: scale(.92); opacity: 0; }
+  70% { transform: scale(1.02); opacity: 1; }
+  100% { transform: scale(1); }
+}
+
+.MuiPaper-root.MuiMenu-paper,
+.ReactModal__Content {
+  animation: kids-pop .28s cubic-bezier(.3, 1.4, .5, 1);
+}

@@ -1,0 +1,149 @@
+/*
+ * Light: an airy, corporate layout with an indigo accent, like Microsoft Teams
+ * and Zoom in light mode. White icon bar, light gray stage, crisp corners.
+ */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+:root {
+  --theme-background: #F3F4F7;
+  --theme-stage-text: #1F2329;
+  --theme-tile: #fff;
+  --theme-tile-hover: #ECEDF7;
+  --theme-nav: #FFFFFF;
+  --theme-nav-active: #ECEBFA;
+  --theme-nav-icon: #5E6472;
+  --theme-nav-icon-active: #5B5FC7;
+  --theme-nav-hover: #F3F3FA;
+  --theme-nav-separator: #E6E8EE;
+  --theme-nav-marker: #5B5FC7;
+  --theme-primary: #5B5FC7;
+  --theme-primary-soft: rgba(91, 95, 199, .2);
+  --theme-on-primary: #fff;
+  --theme-danger: #C4314B;
+  --theme-moderator: #F2B200;
+  --theme-talking: #13A10E;
+  --theme-talking-soft: rgba(19, 161, 14, .22);
+  --theme-panel: #fff;
+  --theme-text: #1F2329;
+  --theme-muted: #7A808C;
+  --theme-line: #E6E8EE;
+  --theme-input: #F7F8FA;
+  --theme-input-border: #DADDE4;
+  --theme-hover: #F5F6FA;
+  --theme-hover-strong: #ECEEF4;
+  --theme-soft: #F3F4F7;
+  --theme-soft-text: #5E6472;
+  --theme-scroll: #CDD1DA;
+  --theme-badge-ring: #fff;
+  --theme-button-bg: #fff;
+  --theme-button-icon: #424854;
+  --theme-button-hover: #F0F1F8;
+  --theme-button-shadow: 0 0 0 1px #E1E4EA, 0 1px 2px rgba(16, 24, 40, .08);
+  --theme-shadow: 0 8px 24px rgba(16, 24, 40, .12);
+  --theme-font: "Inter", "Segoe UI", system-ui, sans-serif;
+
+  --theme-radius: 8px;
+  --theme-radius-sm: 6px;
+  --theme-radius-bubble: 10px;
+  --theme-radius-modal: 12px;
+  --theme-nav-radius: 8px;
+  --theme-action-size: 40px;
+}
+
+/* Icon bar: white, with a hairline between it and the panel */
+.bbb-navigation {
+  border-right: 1px solid var(--theme-line);
+  box-sizing: border-box;
+}
+
+.bbb-navigation__item--active::after {
+  right: auto;
+  left: calc((var(--theme-nav-button) - 100cqw) / 2);
+  border-radius: 0 3px 3px 0;
+  width: 3px;
+}
+
+[dir="rtl"] .bbb-navigation__item--active::after {
+  left: auto;
+  right: calc((var(--theme-nav-button) - 100cqw) / 2);
+}
+
+/* The logo needs no tile on a white bar */
+.bbb-navigation__logo img {
+  padding: 0;
+  background: transparent;
+}
+
+.bbb-navigation__list {
+  background-image: none !important;
+}
+
+/* Sidebar: separated by a line, not by color */
+.bbb-sidebar-content {
+  border-right: 1px solid var(--theme-line);
+  box-sizing: border-box;
+}
+
+.bbb-panel-header__title {
+  font-size: 1.05rem !important;
+  font-weight: 600 !important;
+}
+
+/* Stage cards: presentation and cameras on white with a soft shadow */
+.bbb-presentation__content {
+  box-shadow: 0 1px 3px rgba(16, 24, 40, .10), 0 0 0 1px #E6E8EE;
+}
+
+.bbb-presentation-toolbar {
+  background: #fff !important;
+  border-top: 1px solid var(--theme-line);
+}
+
+.bbb-webcam {
+  border-radius: 8px !important;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(16, 24, 40, .14);
+}
+
+.bbb-webcam::after {
+  border-radius: 8px !important;
+}
+
+.bbb-webcam__name {
+  border-radius: 4px !important;
+  background: rgba(255, 255, 255, .92) !important;
+  color: var(--theme-text) !important;
+  font-weight: 500;
+}
+
+.bbb-webcam__name * {
+  color: var(--theme-text) !important;
+}
+
+/* Top bar: dark icon on a light tile */
+.bbb-options-button > .bbb-button__icon {
+  box-shadow: var(--theme-button-shadow);
+  color: var(--theme-button-icon) !important;
+}
+
+.bbb-talking-indicator__item {
+  border-radius: 6px !important;
+}
+
+/* Chat: own messages tinted with the accent, like Teams */
+.bbb-chat-message .chat-message-content {
+  background: var(--theme-soft) !important;
+}
+
+.bbb-chat-message--own .chat-message-content {
+  background: #E8EBFA !important;
+}
+
+/* Action bar: the active (primary) buttons in indigo, the leave button stays red */
+.bbb-actions-bar .bbb-button--primary > .bbb-button__icon {
+  box-shadow: none !important;
+}
+
+.Toastify__toast {
+  border: 1px solid var(--theme-line);
+}

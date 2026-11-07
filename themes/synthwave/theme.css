@@ -1,0 +1,272 @@
+/*
+ * Synthwave: an 80s sunset, a neon grid floor and pink/cyan glow, the
+ * vaporwave/outrun look (Blade Runner, Tron, Far Cry Blood Dragon). For fun
+ * meetings, game nights and events, not for the condo board.
+ */
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Exo+2:wght@400;500;600;700&display=swap");
+
+:root {
+  --sw-pink: #FF2E97;
+  --sw-cyan: #2DE2E6;
+  --sw-purple: #7B2FF7;
+  --sw-orange: #FF8A3D;
+  --sw-yellow: #FFD319;
+
+  --theme-background: #140726;
+  --theme-stage-text: #FFE3F4;
+  --theme-tile: rgba(255, 46, 151, .14);
+  --theme-tile-hover: rgba(255, 46, 151, .26);
+  --theme-nav: linear-gradient(180deg, #2A0B4A 0%, #3D0E5F 55%, #5A1166 100%);
+  --theme-nav-solid: #3D0E5F;
+  --theme-nav-active: rgba(255, 46, 151, .22);
+  --theme-nav-icon: #E8C7FF;
+  --theme-nav-icon-active: #fff;
+  --theme-nav-hover: rgba(255, 255, 255, .08);
+  --theme-nav-separator: rgba(255, 46, 151, .35);
+  --theme-nav-marker: var(--sw-cyan);
+  --theme-primary: #FF2E97;
+  --theme-primary-soft: rgba(255, 46, 151, .35);
+  --theme-on-primary: #fff;
+  --theme-danger: #FF4D6D;
+  --theme-moderator: #FFD319;
+  --theme-talking: #2DE2E6;
+  --theme-talking-soft: rgba(45, 226, 230, .45);
+  --theme-panel: #1B0A33;
+  --theme-panel-raised: #240E42;
+  --theme-text: #F6E6FF;
+  --theme-muted: #A88BC9;
+  --theme-line: #3A1A5E;
+  --theme-input: #250F45;
+  --theme-input-border: #4E2580;
+  --theme-hover: #26104A;
+  --theme-hover-strong: #321560;
+  --theme-soft: #2A1150;
+  --theme-soft-text: #D9B8FF;
+  --theme-own-bubble: #4A1250;
+  --theme-scroll: #5B2A8F;
+  --theme-badge-ring: #1B0A33;
+  --theme-button-bg: rgba(36, 14, 66, .85);
+  --theme-button-icon: #F6E6FF;
+  --theme-button-hover: rgba(255, 46, 151, .22);
+  --theme-button-shadow: 0 0 0 1px rgba(45, 226, 230, .55), 0 0 12px rgba(45, 226, 230, .25);
+  --theme-shadow: 0 0 0 1px rgba(255, 46, 151, .4), 0 10px 40px rgba(255, 46, 151, .25);
+  --theme-font: "Exo 2", system-ui, sans-serif;
+
+  --theme-radius: 6px;
+  --theme-radius-sm: 4px;
+  --theme-radius-bubble: 6px;
+  --theme-radius-modal: 8px;
+  --theme-nav-radius: 6px;
+}
+
+/* ---- The scene ---- */
+body,
+#layout > div:not([data-test]),
+.bbb-navbar,
+.bbb-actions-bar {
+  background: transparent !important;
+}
+
+/* The scene (scene.svg): sunset sky, striped sun, wireframe mountains, palms
+   and the neon grid floor. Replace scene.svg with any image and rebuild to change it. */
+body {
+  background: url(./scene.svg) center 62% / cover no-repeat fixed, #140726 !important;
+}
+
+/* ---- Icon bar: neon gradient ---- */
+.bbb-navigation,
+.bbb-navigation__bar {
+  background: var(--theme-nav) !important;
+}
+
+.bbb-navigation {
+  box-shadow: 1px 0 0 rgba(255, 46, 151, .5), 4px 0 24px rgba(255, 46, 151, .25);
+}
+
+.bbb-navigation__list {
+  background-image: none !important;
+}
+
+.bbb-navigation__item--active {
+  box-shadow: inset 0 0 0 1px rgba(255, 46, 151, .7), 0 0 14px rgba(255, 46, 151, .45);
+}
+
+.bbb-navigation__item--active i {
+  text-shadow: 0 0 8px var(--sw-pink);
+  filter: drop-shadow(0 0 4px var(--sw-pink));
+}
+
+.bbb-navigation__item--active::after {
+  box-shadow: 0 0 10px var(--sw-cyan);
+}
+
+/* ---- Titles in chrome-like Orbitron ---- */
+.bbb-panel-header__title,
+.bbb-navbar__title,
+.ReactModal__Content > div:first-child > p {
+  font-family: "Orbitron", "Exo 2", sans-serif !important;
+  font-weight: 800 !important;
+  letter-spacing: .06em;
+  text-transform: uppercase !important;
+}
+
+.bbb-panel-header__title {
+  font-size: 1rem !important;
+  color: var(--sw-cyan) !important;
+  text-shadow: 0 0 10px rgba(45, 226, 230, .6);
+}
+
+.bbb-navbar__title,
+.bbb-navbar__title * {
+  font-size: .95rem !important;
+  color: #FFE3F4 !important;
+  text-shadow: 0 0 8px var(--sw-pink), 0 0 20px rgba(255, 46, 151, .6);
+}
+
+/* ---- Sidebar: a dark glass panel with a neon edge ---- */
+.bbb-sidebar-content,
+.bbb-sidebar-content__panel,
+.bbb-sidebar-content__panel > div {
+  background-color: rgba(27, 10, 51, .94) !important;
+}
+
+.bbb-sidebar-content {
+  box-shadow: 1px 0 0 rgba(45, 226, 230, .45), 6px 0 30px rgba(45, 226, 230, .12);
+}
+
+.bbb-panel-header {
+  border-bottom-color: rgba(255, 46, 151, .35) !important;
+}
+
+.bbb-chat-message__name {
+  color: var(--sw-pink) !important;
+}
+
+.bbb-chat-message .chat-message-content {
+  border-left: 2px solid var(--sw-cyan);
+}
+
+.bbb-chat-message--own .chat-message-content {
+  border-left-color: var(--sw-pink);
+}
+
+.bbb-chat-form__input:focus-within {
+  border-color: var(--sw-cyan) !important;
+  box-shadow: 0 0 0 1px var(--sw-cyan), 0 0 14px rgba(45, 226, 230, .4) !important;
+}
+
+#message-input {
+  caret-color: var(--sw-cyan);
+}
+
+/* ---- Action bar: neon outlines ---- */
+.bbb-actions-bar .bbb-button--primary > .bbb-button__icon {
+  background: linear-gradient(135deg, var(--sw-pink), var(--sw-purple)) !important;
+  box-shadow: 0 0 16px rgba(255, 46, 151, .7) !important;
+}
+
+:is(.bbb-mute-toggle--muted, .bbb-video-toggle--off) > .bbb-button__icon {
+  box-shadow: 0 0 0 1px rgba(255, 77, 109, .8), 0 0 12px rgba(255, 77, 109, .35) !important;
+}
+
+.bbb-actions-bar .bbb-button--default:hover > .bbb-button__icon {
+  color: #fff !important;
+}
+
+/* ---- Stage: cameras and slides with a glow ---- */
+.bbb-webcam {
+  border-radius: 6px !important;
+  overflow: hidden;
+  box-shadow: 0 0 0 1px rgba(45, 226, 230, .6), 0 0 18px rgba(45, 226, 230, .3);
+}
+
+.bbb-webcam--talking::after {
+  border-color: var(--sw-cyan) !important;
+  box-shadow: inset 0 0 18px rgba(45, 226, 230, .5), 0 0 20px rgba(45, 226, 230, .6) !important;
+}
+
+.bbb-webcam__name {
+  background: rgba(20, 7, 38, .8) !important;
+  border: 1px solid rgba(255, 46, 151, .6);
+}
+
+.bbb-presentation__content {
+  box-shadow: 0 0 0 1px rgba(255, 46, 151, .7), 0 0 30px rgba(255, 46, 151, .35);
+}
+
+.bbb-talking-indicator__item {
+  background: rgba(45, 226, 230, .18) !important;
+  border: 1px solid var(--sw-cyan) !important;
+  box-shadow: 0 0 10px rgba(45, 226, 230, .5);
+  color: #fff !important;
+}
+
+/* Top bar: neon leave and connection buttons */
+.bbb-leave-button button.bbb-button--danger {
+  background: transparent !important;
+  border: 1px solid var(--theme-danger) !important;
+  box-shadow: 0 0 12px rgba(255, 77, 109, .5);
+  color: var(--theme-danger) !important;
+}
+
+.bbb-leave-button button.bbb-button--danger i {
+  color: var(--theme-danger) !important;
+}
+
+button.bbb-connection-status-button.bbb-button--success > span.bbb-button__icon {
+  background: rgba(45, 226, 230, .15) !important;
+  box-shadow: inset 0 0 0 1px var(--sw-cyan), 0 0 10px rgba(45, 226, 230, .4) !important;
+}
+
+.bbb-options-button > .bbb-button__icon {
+  box-shadow: inset 0 0 0 1px rgba(255, 46, 151, .6) !important;
+}
+
+/* Avatars: neon rings */
+.bbb-avatar {
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, .25), 0 0 10px rgba(255, 46, 151, .45);
+}
+
+.bbb-avatar--talking {
+  animation: sw-talk 1s ease-in-out infinite alternate !important;
+}
+
+@keyframes sw-talk {
+  from { box-shadow: 0 0 0 2px var(--sw-cyan), 0 0 6px var(--sw-cyan); }
+  to { box-shadow: 0 0 0 2px var(--sw-cyan), 0 0 18px var(--sw-cyan); }
+}
+
+/* Menus, modals, toasts: neon frames */
+.MuiPaper-root.MuiMenu-paper,
+.ReactModal__Content,
+.Toastify__toast {
+  border: 1px solid rgba(255, 46, 151, .55) !important;
+  box-shadow: 0 0 24px rgba(255, 46, 151, .3) !important;
+}
+
+.ReactModal__Content > div:first-child > p {
+  color: var(--sw-cyan) !important;
+  text-shadow: 0 0 10px rgba(45, 226, 230, .6);
+}
+
+.ReactModal__Overlay {
+  background-color: rgba(11, 2, 33, .7) !important;
+  backdrop-filter: blur(3px);
+}
+
+/* Scanlines over the whole stage, very faint, for the CRT feel */
+#layout::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(180deg, rgba(255, 255, 255, .025) 0 1px, transparent 1px 3px);
+  pointer-events: none;
+  z-index: 9999;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bbb-avatar--talking {
+    animation: none !important;
+    box-shadow: 0 0 0 2px var(--sw-cyan), 0 0 12px var(--sw-cyan);
+  }
+}
