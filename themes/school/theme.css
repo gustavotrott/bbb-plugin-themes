@@ -75,7 +75,9 @@ body {
 
 /* A little larger text, easier to read */
 .bbb-chat-message .chat-message-content,
-.bbb-user-list-item {
+.bbb-user-list-item,
+.bbb-raised-hands__item,
+[data-test="raisedHandsListItem"] {
   font-size: 15px !important;
 }
 
