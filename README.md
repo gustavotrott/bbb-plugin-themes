@@ -43,14 +43,14 @@ These steps install from the latest [release](https://github.com/gustavotrott/bb
    THEME=moodle
    sudo mkdir -p /var/www/bigbluebutton-default/assets/plugins/bbb-plugin-$THEME-theme
    curl -fsSL https://github.com/gustavotrott/bbb-plugin-themes/releases/latest/download/bbb-plugin-$THEME-theme.tar.gz \
-     | sudo tar xz -C /var/www/bigbluebutton-default/assets/plugins/bbb-plugin-$THEME-theme
+     | sudo tar xz --no-same-owner -C /var/www/bigbluebutton-default/assets/plugins/bbb-plugin-$THEME-theme
    ```
 
    Or all seven at once, each in its own `bbb-plugin-<theme>-theme` folder:
 
    ```bash
    curl -fsSL https://github.com/gustavotrott/bbb-plugin-themes/releases/latest/download/bbb-plugin-themes.tar.gz \
-     | sudo tar xz -C /var/www/bigbluebutton-default/assets/plugins
+     | sudo tar xz --no-same-owner -C /var/www/bigbluebutton-default/assets/plugins
    ```
 
 2. Add the manifest to `pluginManifests` in `/etc/bigbluebutton/bbb-web.properties`. If the line already lists other plugins, add the theme to the list and remove any other theme:

@@ -34,10 +34,11 @@ jobs:
           mkdir -p release all
           for dir in dist/*/; do
             theme=$(basename "$dir")
-            tar czf "release/bbb-plugin-$theme-theme.tar.gz" -C "$dir" .
+            tar czf "release/bbb-plugin-$theme-theme.tar.gz" --owner=0 --group=0 -C "$dir" .
             cp -R "$dir" "all/bbb-plugin-$theme-theme"
           done
-          tar czf release/bbb-plugin-themes.tar.gz -C all .
+          # Folders only, no "." entry, so extracting never touches the plugins folder itself
+          (cd all && tar czf ../release/bbb-plugin-themes.tar.gz --owner=0 --group=0 bbb-plugin-*-theme)
           ls -l release
       - name: Site
         if: github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
