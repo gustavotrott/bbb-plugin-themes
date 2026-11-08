@@ -13,7 +13,7 @@ They are pure CSS and share one base derived from [bbb-plugin-flat-theme](https:
 - **As a plugin** (`pluginManifests`), the default.
 - **As a plain stylesheet** (`customStyleUrl`): one static `theme.css` with the icons and backgrounds inlined, if you would rather not run a plugin. See [Use a theme as a custom style](#use-a-theme-as-a-custom-style-css-only).
 
-> **Requires BigBlueButton 4.0.1 or later** (the static `bbb-*` classes). Use one theme at a time.
+> **The plugins require BigBlueButton 4.0.1 or later** (the static `bbb-*` classes). For 4.0.0, use a theme as a [custom style](#use-a-theme-as-a-custom-style-css-only). Use one theme at a time.
 
 <table>
 <tr><td width="50%"><a href="#cozy"><img src="themes/cozy/screenshot.jpg" alt="Cozy"><br><b>Cozy</b></a></td><td width="50%"><a href="#kids"><img src="themes/kids/screenshot.jpg" alt="Kids"><br><b>Kids</b></a></td></tr>
@@ -76,7 +76,17 @@ You can skip the download and put the GitHub Pages manifest in `bbb-web.properti
 
 The build also writes `dist/<theme>/theme.css`: the same theme as one static stylesheet, with the icons and backgrounds inlined as data URIs. The client adds it as a `<link rel="stylesheet">`, so nothing runs besides the CSS. Use the plugin or the stylesheet, not both, and only one theme at a time.
 
-Each theme's stylesheet is on GitHub Pages at `https://gustavotrott.github.io/bbb-plugin-themes/<theme>/theme.css`, and the release tarballs include it next to the plugin.
+Pick the stylesheet for your BigBlueButton version (here for `moodle`; swap in any theme):
+
+| BigBlueButton | Stylesheet |
+|---|---|
+| 4.0.3 or later (with [#26415](https://github.com/bigbluebutton/bigbluebutton/pull/26415)) | `https://gustavotrott.github.io/bbb-plugin-themes/moodle/4.0.3/theme.css` |
+| 4.0.1 and 4.0.2 | `https://gustavotrott.github.io/bbb-plugin-themes/moodle/4.0.1/theme.css` |
+| 4.0.0 | `https://gustavotrott.github.io/bbb-plugin-themes/moodle/4.0.0/theme.css` |
+
+`https://gustavotrott.github.io/bbb-plugin-themes/<theme>/theme.css` always follows the newest version on `main`. The release tarballs include the stylesheets next to the plugin.
+
+The 4.0.0 and 4.0.1 stylesheets are frozen in [`versions/`](versions): new changes only go to the newest version. The 4.0.0 ones reach the client through the `data-test` attributes and ids that 4.0.0 already had, so a few details need a newer client: the presenter badge in the user list, the color of your own chat messages, the ring on the avatar of whoever speaks and the unread dot on the icon bar. The themes themselves (the plugins) still need 4.0.1.
 
 **For one user**, pass it on the `join` call:
 
@@ -86,14 +96,14 @@ userdata-bbb_custom_style_url=https://gustavotrott.github.io/bbb-plugin-themes/m
 
 **For the whole server**, host it yourself (or use the GitHub Pages URL):
 
-1. Download the theme as in step 1 of [Install on your server](#install-on-your-server). The folder now holds `theme.css` too.
+1. Download the theme as in step 1 of [Install on your server](#install-on-your-server). The folder now holds `theme.css` (newest version) and `4.0.0/theme.css`, `4.0.1/theme.css` for older clients.
 
 2. Set `public.app.customStyleUrl` in `/etc/bigbluebutton/bbb-html5.yml`:
 
    ```yaml
    public:
      app:
-       customStyleUrl: https://<your-server>/plugins/bbb-plugin-moodle-theme/theme.css
+       customStyleUrl: https://<your-server>/plugins/bbb-plugin-moodle-theme/4.0.1/theme.css   # the folder for your version
    ```
 
 3. Restart BigBlueButton (`sudo bbb-conf --restart`). The client settings are stored per meeting by akka-apps, which only reads `bbb-html5.yml` on startup.
@@ -118,7 +128,7 @@ Beige, earthy tones, soft sage green and round corners: a warm, less institution
 
 Manifest: `https://gustavotrott.github.io/bbb-plugin-themes/cozy/manifest.json`
 
-Stylesheet: `https://gustavotrott.github.io/bbb-plugin-themes/cozy/theme.css`
+Stylesheet: `https://gustavotrott.github.io/bbb-plugin-themes/cozy/<4.0.0|4.0.1|4.0.3>/theme.css`
 
 ### Kids
 
@@ -136,7 +146,7 @@ Bright colors, chunky round buttons and a playful font, for classes with childre
 
 Manifest: `https://gustavotrott.github.io/bbb-plugin-themes/kids/manifest.json`
 
-Stylesheet: `https://gustavotrott.github.io/bbb-plugin-themes/kids/theme.css`
+Stylesheet: `https://gustavotrott.github.io/bbb-plugin-themes/kids/<4.0.0|4.0.1|4.0.3>/theme.css`
 
 ### Light
 
@@ -153,7 +163,7 @@ An airy, corporate light layout with an indigo accent, like Microsoft Teams and 
 
 Manifest: `https://gustavotrott.github.io/bbb-plugin-themes/light/manifest.json`
 
-Stylesheet: `https://gustavotrott.github.io/bbb-plugin-themes/light/theme.css`
+Stylesheet: `https://gustavotrott.github.io/bbb-plugin-themes/light/<4.0.0|4.0.1|4.0.3>/theme.css`
 
 ### Midnight
 
@@ -170,7 +180,7 @@ The whole client in dark mode, like Discord, Zoom and Slack at night.
 
 Manifest: `https://gustavotrott.github.io/bbb-plugin-themes/midnight/manifest.json`
 
-Stylesheet: `https://gustavotrott.github.io/bbb-plugin-themes/midnight/theme.css`
+Stylesheet: `https://gustavotrott.github.io/bbb-plugin-themes/midnight/<4.0.0|4.0.1|4.0.3>/theme.css`
 
 ### Synthwave
 
@@ -187,7 +197,7 @@ An 80s sunset with a neon grid floor and pink/cyan glow (vaporwave / outrun), fo
 
 Manifest: `https://gustavotrott.github.io/bbb-plugin-themes/synthwave/manifest.json`
 
-Stylesheet: `https://gustavotrott.github.io/bbb-plugin-themes/synthwave/theme.css`
+Stylesheet: `https://gustavotrott.github.io/bbb-plugin-themes/synthwave/<4.0.0|4.0.1|4.0.3>/theme.css`
 
 ### Moodle
 
@@ -206,7 +216,7 @@ The colours, type and shapes of the [Moodle Design System](https://design.moodle
 
 Manifest: `https://gustavotrott.github.io/bbb-plugin-themes/moodle/manifest.json`
 
-Stylesheet: `https://gustavotrott.github.io/bbb-plugin-themes/moodle/theme.css`
+Stylesheet: `https://gustavotrott.github.io/bbb-plugin-themes/moodle/<4.0.0|4.0.1|4.0.3>/theme.css`
 
 ### School (K-12)
 
@@ -224,7 +234,7 @@ Made for K-12 classes: legible and calm, with every tool in its own colour, frie
 
 Manifest: `https://gustavotrott.github.io/bbb-plugin-themes/school/manifest.json`
 
-Stylesheet: `https://gustavotrott.github.io/bbb-plugin-themes/school/theme.css`
+Stylesheet: `https://gustavotrott.github.io/bbb-plugin-themes/school/<4.0.0|4.0.1|4.0.3>/theme.css`
 
 ## Build from source
 
@@ -236,7 +246,7 @@ npm run build-css                                        # only the stylesheets
 node scripts/css.js cozy,school                          # only some stylesheets
 ```
 
-Each `dist/<theme>/` holds `<Library>.js`, `manifest.json` and `theme.css`. Copy it to `/var/www/bigbluebutton-default/assets/plugins/bbb-plugin-<theme>-theme/` and follow steps 2 and 3 above.
+Each `dist/<theme>/` holds `<Library>.js`, `manifest.json`, `theme.css` and the frozen stylesheets for older versions, copied from `versions/<theme>/`. Copy it to `/var/www/bigbluebutton-default/assets/plugins/bbb-plugin-<theme>-theme/` and follow steps 2 and 3 above.
 
 ## Layout
 
