@@ -1,17 +1,30 @@
-// Builds dist/<theme>/theme.css: the same styles as the plugin, as one static
-// stylesheet for BigBlueButton's custom style URL (public.app.customStyleUrl in
-// settings.yml, or userdata-bbb_custom_style_url on /join).
-// Each theme's index.tsx lists its stylesheets in order; they are joined into one
-// file, local images become data URIs and @import rules move to the top.
-// Build only some of them with: node scripts/css.js cozy,kids
+// Builds each theme as one static stylesheet for BigBlueButton's custom style
+// URL (public.app.customStyleUrl in settings.yml, or userdata-bbb_custom_style_url
+// on /join). Each theme's index.tsx lists its stylesheets in order; they are
+// joined into one file, local images become data URIs and @import rules move
+// to the top.
+//
+//   node scripts/css.js [cozy,kids]    dist/<theme>/theme.css, for the newest BigBlueButton,
+//                                      plus the frozen stylesheets for older versions,
+//                                      copied as they are from versions/<theme>/<version>/
+//   node scripts/css.js --root <dir> --version 4.0.3
+//                                      builds the checkout in <dir> (another branch) into
+//                                      dist/<theme>/4.0.3/theme.css
 const fs = require('fs');
 const path = require('path');
 
-const root = path.resolve(__dirname, '..');
-const pkg = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8'));
+const repo = path.resolve(__dirname, '..');
+const args = process.argv.slice(2);
+const opt = (name) => {
+  const i = args.indexOf(name);
+  return i >= 0 ? args.splice(i, 2)[1] : undefined;
+};
+const root = path.resolve(opt('--root') || repo);
+const version = opt('--version');
+const pkg = JSON.parse(fs.readFileSync(path.join(repo, 'package.json'), 'utf8'));
 const all = fs.readdirSync(path.join(root, 'themes'))
   .filter((t) => fs.existsSync(path.join(root, 'themes', t, 'manifest.json')));
-const themes = process.argv[2] ? process.argv[2].split(',') : all;
+const themes = args[0] ? args[0].split(',') : all;
 
 const MIME = { '.svg': 'image/svg+xml', '.png': 'image/png', '.jpg': 'image/jpeg', '.webp': 'image/webp' };
 
@@ -25,23 +38,36 @@ function inline(file) {
   });
 }
 
-themes.forEach((theme) => {
+function build(theme) {
   const dir = path.join(root, 'themes', theme);
   const sheets = [...fs.readFileSync(path.join(dir, 'index.tsx'), 'utf8').matchAll(/^import '([^']+\.css)';/gm)]
     .map((m) => path.resolve(dir, m[1]));
   const imports = [];
-  const body = sheets.map((file) => inline(file).replace(/^@import[^;]+;\s*\n?/gm, (rule) => {
+  const body = sheets.map((file) => inline(file).replace(/^@import\b.*;[ \t]*\n?/gm, (rule) => {
     imports.push(rule.trim());
     return '';
   }).trim()).join('\n\n');
-  const out = path.join(root, 'dist', theme);
-  fs.mkdirSync(out, { recursive: true });
-  fs.writeFileSync(path.join(out, 'theme.css'), [
-    `/* ${pkg.name} ${pkg.version}: ${theme} theme. ${pkg.license} license. */`,
-    ...imports,
-    '',
-    body,
-    '',
-  ].join('\n'));
-  console.log(`dist/${theme}/theme.css`, `${Math.round(fs.statSync(path.join(out, 'theme.css')).size / 1024)} KB`);
+  return (label) => [`/* ${pkg.name} ${pkg.version}: ${theme} theme for BigBlueButton ${label}. ${pkg.license} license. */`, ...imports, '', body, ''].join('\n');
+}
+
+function write(file, css) {
+  fs.mkdirSync(path.dirname(file), { recursive: true });
+  fs.writeFileSync(file, css);
+  console.log(path.relative(repo, file), `${Math.round(css.length / 1024)} KB`);
+}
+
+themes.forEach((theme) => {
+  const css = build(theme);
+  const out = path.join(repo, 'dist', theme);
+  if (version) {
+    write(path.join(out, version, 'theme.css'), css(version));
+    return;
+  }
+  write(path.join(out, 'theme.css'), css('4.0.1 or later'));
+  // Older client versions: stylesheets frozen when that version was current
+  const frozen = path.join(repo, 'versions', theme);
+  if (fs.existsSync(frozen)) {
+    fs.cpSync(frozen, out, { recursive: true });
+    console.log(`dist/${theme}/: ${fs.readdirSync(frozen).join(', ')} (frozen)`);
+  }
 });

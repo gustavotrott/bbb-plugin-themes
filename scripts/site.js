@@ -32,6 +32,7 @@ const cards = themes.map((theme) => {
     <p>${esc(text)}</p>
     <div class="url"><span>Plugin</span><code data-url="${theme}/manifest.json"></code><button type="button" data-url="${theme}/manifest.json">Copy</button></div>
     <div class="url"><span>CSS</span><code data-url="${theme}/theme.css"></code><button type="button" data-url="${theme}/theme.css">Copy</button></div>
+    <p class="versions">CSS for BigBlueButton <a href="${theme}/4.0.3/theme.css">4.0.3+</a> · <a href="${theme}/4.0.1/theme.css">4.0.1–4.0.2</a> · <a href="${theme}/4.0.0/theme.css">4.0.0</a></p>
   </div>
 </article>`;
 }).join('\n');
@@ -58,6 +59,7 @@ h2 { margin: 0; font-size: 1.15rem; }
 p { margin: 0; color: var(--muted); font-size: .95rem; }
 .url { display: flex; gap: 8px; align-items: center; margin-top: 4px; }
 .url span { flex: 0 0 3.2em; font-size: .78rem; color: var(--muted); }
+.versions { font-size: .8rem; }
 code { flex: 1; min-width: 0; font-size: .78rem; background: var(--bg); border: 1px solid var(--line); border-radius: 6px; padding: 6px 8px; overflow-wrap: anywhere; }
 button { font: inherit; font-size: .85rem; padding: 6px 12px; border-radius: 6px; border: 1px solid var(--accent); background: var(--accent); color: #fff; cursor: pointer; }
 a { color: var(--accent); }
