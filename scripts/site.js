@@ -30,7 +30,8 @@ const cards = themes.map((theme) => {
   <div class="body">
     <h2>${esc(title)}</h2>
     <p>${esc(text)}</p>
-    <div class="url"><code data-theme="${theme}"></code><button type="button" data-theme="${theme}">Copy</button></div>
+    <div class="url"><span>Plugin</span><code data-url="${theme}/manifest.json"></code><button type="button" data-url="${theme}/manifest.json">Copy</button></div>
+    <div class="url"><span>CSS</span><code data-url="${theme}/theme.css"></code><button type="button" data-url="${theme}/theme.css">Copy</button></div>
   </div>
 </article>`;
 }).join('\n');
@@ -56,6 +57,7 @@ article img { width: 100%; height: auto; display: block; border-bottom: 1px soli
 h2 { margin: 0; font-size: 1.15rem; }
 p { margin: 0; color: var(--muted); font-size: .95rem; }
 .url { display: flex; gap: 8px; align-items: center; margin-top: 4px; }
+.url span { flex: 0 0 3.2em; font-size: .78rem; color: var(--muted); }
 code { flex: 1; min-width: 0; font-size: .78rem; background: var(--bg); border: 1px solid var(--line); border-radius: 6px; padding: 6px 8px; overflow-wrap: anywhere; }
 button { font: inherit; font-size: .85rem; padding: 6px 12px; border-radius: 6px; border: 1px solid var(--accent); background: var(--accent); color: #fff; cursor: pointer; }
 a { color: var(--accent); }
@@ -64,16 +66,16 @@ a { color: var(--accent); }
 <body>
 <main>
 <h1>BigBlueButton themes</h1>
-<p class="lead">Theme plugins for BigBlueButton 4.0.1 or later (v${pkg.version}). To try one, pass its manifest on the meeting's <code>create</code> call as <code>pluginManifests=[{"url":"&lt;manifest&gt;"}]</code>. To install one on your server, see the <a href="https://github.com/gustavotrott/bbb-plugin-themes#install-on-your-server">README</a>.</p>
+<p class="lead">Theme plugins for BigBlueButton 4.0.1 or later (v${pkg.version}). To try one, pass its manifest on the meeting's <code>create</code> call as <code>pluginManifests=[{"url":"&lt;manifest&gt;"}]</code>. Each theme is also a plain stylesheet for <code>customStyleUrl</code> (or <code>userdata-bbb_custom_style_url</code> on <code>join</code>). To install one on your server, see the <a href="https://github.com/gustavotrott/bbb-plugin-themes#install-on-your-server">README</a>.</p>
 <div class="grid">
 ${cards}
 </div>
 </main>
 <script>
 const base = new URL('.', location.href).href;
-document.querySelectorAll('code[data-theme]').forEach((c) => { c.textContent = base + c.dataset.theme + '/manifest.json'; });
-document.querySelectorAll('button[data-theme]').forEach((b) => b.addEventListener('click', async () => {
-  const text = base + b.dataset.theme + '/manifest.json';
+document.querySelectorAll('code[data-url]').forEach((c) => { c.textContent = base + c.dataset.url; });
+document.querySelectorAll('button[data-url]').forEach((b) => b.addEventListener('click', async () => {
+  const text = base + b.dataset.url;
   try { await navigator.clipboard.writeText(text); b.textContent = 'Copied'; } catch (e) { b.textContent = 'Select it'; }
   setTimeout(() => { b.textContent = 'Copy'; }, 1500);
 }));

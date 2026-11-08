@@ -5,7 +5,8 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "build-bundle": "webpack --mode production"
+    "build-bundle": "webpack --mode production && node scripts/css.js",
+    "build-css": "node scripts/css.js"
   },
   "dependencies": {
     "bigbluebutton-html-plugin-sdk": "^1.0.0-beta.2",

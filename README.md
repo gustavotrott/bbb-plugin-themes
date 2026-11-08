@@ -8,7 +8,10 @@ Seven theme plugins for the BigBlueButton 4.0 HTML5 client. Each one changes col
 - cameras that fill their tile, with a green ring on whoever speaks
 - a keyboard focus ring, and reduced motion when the system asks for it
 
-They are pure CSS shipped as plugins and share one base derived from [bbb-plugin-flat-theme](https://github.com/gustavotrott/bbb-plugin-flat-theme).
+They are pure CSS and share one base derived from [bbb-plugin-flat-theme](https://github.com/gustavotrott/bbb-plugin-flat-theme). Each theme comes two ways:
+
+- **As a plugin** (`pluginManifests`), the default.
+- **As a plain stylesheet** (`customStyleUrl`): one static `theme.css` with the icons and backgrounds inlined, if you would rather not run a plugin. See [Use a theme as a custom style](#use-a-theme-as-a-custom-style-css-only).
 
 > **Requires BigBlueButton 4.0.1 or later** (the static `bbb-*` classes). Use one theme at a time.
 
@@ -69,6 +72,34 @@ Meetings created from then on use the theme. To update, run step 1 again. No res
 
 You can skip the download and put the GitHub Pages manifest in `bbb-web.properties` instead. The theme then always follows the latest version on `main`.
 
+## Use a theme as a custom style (CSS only)
+
+The build also writes `dist/<theme>/theme.css`: the same theme as one static stylesheet, with the icons and backgrounds inlined as data URIs. The client adds it as a `<link rel="stylesheet">`, so nothing runs besides the CSS. Use the plugin or the stylesheet, not both, and only one theme at a time.
+
+Each theme's stylesheet is on GitHub Pages at `https://gustavotrott.github.io/bbb-plugin-themes/<theme>/theme.css`, and the release tarballs include it next to the plugin.
+
+**For one user**, pass it on the `join` call:
+
+```text
+userdata-bbb_custom_style_url=https://gustavotrott.github.io/bbb-plugin-themes/moodle/theme.css
+```
+
+**For the whole server**, host it yourself (or use the GitHub Pages URL):
+
+1. Download the theme as in step 1 of [Install on your server](#install-on-your-server). The folder now holds `theme.css` too.
+
+2. Set `public.app.customStyleUrl` in `/etc/bigbluebutton/bbb-html5.yml`:
+
+   ```yaml
+   public:
+     app:
+       customStyleUrl: https://<your-server>/plugins/bbb-plugin-moodle-theme/theme.css
+   ```
+
+3. Restart BigBlueButton (`sudo bbb-conf --restart`). The client settings are stored per meeting by akka-apps, which only reads `bbb-html5.yml` on startup.
+
+Meetings created from then on load the stylesheet. To update, run step 1 again.
+
 ## Themes
 
 ### Cozy
@@ -87,6 +118,8 @@ Beige, earthy tones, soft sage green and round corners: a warm, less institution
 
 Manifest: `https://gustavotrott.github.io/bbb-plugin-themes/cozy/manifest.json`
 
+Stylesheet: `https://gustavotrott.github.io/bbb-plugin-themes/cozy/theme.css`
+
 ### Kids
 
 Bright colors, chunky round buttons and a playful font, for classes with children.
@@ -103,6 +136,8 @@ Bright colors, chunky round buttons and a playful font, for classes with childre
 
 Manifest: `https://gustavotrott.github.io/bbb-plugin-themes/kids/manifest.json`
 
+Stylesheet: `https://gustavotrott.github.io/bbb-plugin-themes/kids/theme.css`
+
 ### Light
 
 An airy, corporate light layout with an indigo accent, like Microsoft Teams and Zoom in light mode.
@@ -117,6 +152,8 @@ An airy, corporate light layout with an indigo accent, like Microsoft Teams and 
 **Best for:** Companies and formal meetings, rooms with a projector or lots of light.
 
 Manifest: `https://gustavotrott.github.io/bbb-plugin-themes/light/manifest.json`
+
+Stylesheet: `https://gustavotrott.github.io/bbb-plugin-themes/light/theme.css`
 
 ### Midnight
 
@@ -133,6 +170,8 @@ The whole client in dark mode, like Discord, Zoom and Slack at night.
 
 Manifest: `https://gustavotrott.github.io/bbb-plugin-themes/midnight/manifest.json`
 
+Stylesheet: `https://gustavotrott.github.io/bbb-plugin-themes/midnight/theme.css`
+
 ### Synthwave
 
 An 80s sunset with a neon grid floor and pink/cyan glow (vaporwave / outrun), for fun meetings and events.
@@ -147,6 +186,8 @@ An 80s sunset with a neon grid floor and pink/cyan glow (vaporwave / outrun), fo
 **Best for:** Events, parties, game nights and demos.
 
 Manifest: `https://gustavotrott.github.io/bbb-plugin-themes/synthwave/manifest.json`
+
+Stylesheet: `https://gustavotrott.github.io/bbb-plugin-themes/synthwave/theme.css`
 
 ### Moodle
 
@@ -165,6 +206,8 @@ The colours, type and shapes of the [Moodle Design System](https://design.moodle
 
 Manifest: `https://gustavotrott.github.io/bbb-plugin-themes/moodle/manifest.json`
 
+Stylesheet: `https://gustavotrott.github.io/bbb-plugin-themes/moodle/theme.css`
+
 ### School (K-12)
 
 Made for K-12 classes: legible and calm, with every tool in its own colour, friendly for young pupils without looking childish to teenagers.
@@ -181,15 +224,19 @@ Made for K-12 classes: legible and calm, with every tool in its own colour, frie
 
 Manifest: `https://gustavotrott.github.io/bbb-plugin-themes/school/manifest.json`
 
+Stylesheet: `https://gustavotrott.github.io/bbb-plugin-themes/school/theme.css`
+
 ## Build from source
 
 ```bash
 npm ci
 npm run build-bundle                                     # every theme, into dist/<theme>/
-npx webpack --mode production --env themes=cozy,school   # only some
+npx webpack --mode production --env themes=cozy,school   # only some plugins
+npm run build-css                                        # only the stylesheets
+node scripts/css.js cozy,school                          # only some stylesheets
 ```
 
-Each `dist/<theme>/` holds `<Library>.js` and `manifest.json`. Copy it to `/var/www/bigbluebutton-default/assets/plugins/bbb-plugin-<theme>-theme/` and follow steps 2 and 3 above.
+Each `dist/<theme>/` holds `<Library>.js`, `manifest.json` and `theme.css`. Copy it to `/var/www/bigbluebutton-default/assets/plugins/bbb-plugin-<theme>-theme/` and follow steps 2 and 3 above.
 
 ## Layout
 
@@ -207,7 +254,7 @@ To make a new theme, copy a folder in `themes/`, change the library `name` in it
 
 ## Releases
 
-Every push to `main` publishes `dist/` on GitHub Pages. Pushing a `v*` tag, with the same version as `package.json` and the manifests, builds the themes and attaches the tarballs to a GitHub release:
+Every push to `main` publishes `dist/` (plugins and stylesheets) on GitHub Pages. Pushing a `v*` tag, with the same version as `package.json` and the manifests, builds the themes and attaches the tarballs to a GitHub release:
 
 - `bbb-plugin-<theme>-theme.tar.gz`, one per theme
 - `bbb-plugin-themes.tar.gz`, with all of them

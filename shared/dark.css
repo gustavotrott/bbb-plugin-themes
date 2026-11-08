@@ -66,13 +66,13 @@
   color: var(--theme-text) !important;
 }
 
-.bbb-sidebar-content__panel button:not(.bbb-button--primary):not([data-test="sendMessageButton"]):not(:is([data-test="saveSettingsButton"], [data-test="startPoll"], [data-test="confirmEndMeeting"], [data-test="confirmButton"], [data-test="button-Cancelar"], [data-test="cancelPollCreation"], [data-test="cancelButton"])) {
+.bbb-sidebar-content__panel button:not(.bbb-button--primary):not([data-test="sendMessageButton"]):not(:is([data-test="saveSettingsButton"], [data-test="startPoll"], [data-test="confirmEndMeeting"], [data-test="confirmButton"], button:has(+ [data-test="saveSettingsButton"]), [data-test="cancelPollCreation"], [data-test="cancelButton"])) {
   background-color: var(--theme-input) !important;
   border-color: var(--theme-input-border) !important;
   color: var(--theme-text) !important;
 }
 
-.bbb-sidebar-content__panel button:not(.bbb-button--primary):not([data-test="sendMessageButton"]):not(:is([data-test="saveSettingsButton"], [data-test="startPoll"], [data-test="confirmEndMeeting"], [data-test="confirmButton"], [data-test="button-Cancelar"], [data-test="cancelPollCreation"], [data-test="cancelButton"])):hover {
+.bbb-sidebar-content__panel button:not(.bbb-button--primary):not([data-test="sendMessageButton"]):not(:is([data-test="saveSettingsButton"], [data-test="startPoll"], [data-test="confirmEndMeeting"], [data-test="confirmButton"], button:has(+ [data-test="saveSettingsButton"]), [data-test="cancelPollCreation"], [data-test="cancelButton"])):hover {
   background-color: var(--theme-hover-strong) !important;
 }
 
@@ -162,7 +162,7 @@
   color: var(--theme-text);
 }
 
-.ReactModal__Content button:not(.bbb-button--primary):not([data-test="closeModal"]):not(:is([data-test="saveSettingsButton"], [data-test="startPoll"], [data-test="confirmEndMeeting"], [data-test="confirmButton"], [data-test="button-Cancelar"], [data-test="cancelPollCreation"], [data-test="cancelButton"])) {
+.ReactModal__Content button:not(.bbb-button--primary):not([data-test="closeModal"]):not(:is([data-test="saveSettingsButton"], [data-test="startPoll"], [data-test="confirmEndMeeting"], [data-test="confirmButton"], button:has(+ [data-test="saveSettingsButton"]), [data-test="cancelPollCreation"], [data-test="cancelButton"])) {
   background-color: var(--theme-input) !important;
   border-color: var(--theme-input-border) !important;
   color: var(--theme-text) !important;
@@ -214,7 +214,7 @@
 }
 
 /* Cancel buttons: outlined on the dark surface, not a white box */
-:is([data-test="button-Cancelar"], [data-test="cancelPollCreation"], [data-test="cancelButton"]) {
+:is(button:has(+ [data-test="saveSettingsButton"]), [data-test="cancelPollCreation"], [data-test="cancelButton"]) {
   background-color: transparent !important;
 }
 

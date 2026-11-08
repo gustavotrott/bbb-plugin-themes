@@ -1165,12 +1165,12 @@ select {
   color: var(--theme-on-primary) !important;
 }
 
-:is([data-test="button-Cancelar"], [data-test="cancelPollCreation"], [data-test="cancelButton"]) {
+:is(button:has(+ [data-test="saveSettingsButton"]), [data-test="cancelPollCreation"], [data-test="cancelButton"]) {
   border-color: var(--theme-primary) !important;
   color: var(--theme-primary) !important;
 }
 
-:is([data-test="button-Cancelar"], [data-test="cancelPollCreation"], [data-test="cancelButton"]) * {
+:is(button:has(+ [data-test="saveSettingsButton"]), [data-test="cancelPollCreation"], [data-test="cancelButton"]) * {
   color: var(--theme-primary) !important;
 }
 
