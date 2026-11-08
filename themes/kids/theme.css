@@ -238,7 +238,7 @@ body {
 }
 
 /* Raised hands: a big yellow hand */
-[data-test="raisedHandsListItem"] .bbb-avatar {
+.bbb-raised-hands__item .bbb-avatar {
   background: #FFC21A !important;
 }
 

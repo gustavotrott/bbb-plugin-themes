@@ -130,7 +130,7 @@ body {
 
 /* Top bar: terracotta leave, sage connection, cream options */
 .bbb-leave-button .bbb-button__icon,
-[data-test="leaveMeetingDropdown"] .bbb-button__icon {
+.bbb-leave-button .bbb-button__icon {
   background: var(--theme-danger) !important;
   border-radius: 12px !important;
 }

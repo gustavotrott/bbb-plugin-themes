@@ -13,10 +13,10 @@
 }
 
 .bbb-sidebar-content__panel i:not(.bbb-avatar *, .bbb-button--primary *),
-.bbb-sidebar-content__panel [data-test="userNameSubs"],
-.bbb-sidebar-content__panel [data-test="userNameSubs"] *,
-.bbb-sidebar-content__panel [data-test="typingIndicator"],
-.bbb-sidebar-content__panel [data-test="typingIndicator"] * {
+.bbb-sidebar-content__panel .bbb-user-list-item__subs,
+.bbb-sidebar-content__panel .bbb-user-list-item__subs *,
+.bbb-sidebar-content__panel .bbb-chat__typing,
+.bbb-sidebar-content__panel .bbb-chat__typing * {
   color: var(--theme-muted) !important;
 }
 
@@ -33,7 +33,7 @@
  * gradients) in fixed light colors. No !important, so the explicit surfaces
  * below (bubbles, fields, buttons) still win. Avatars keep their colors.
  */
-.bbb-sidebar-content__panel div:not(.bbb-avatar, .bbb-avatar *, #chat-list, [data-test="raisedHandRank"]) {
+.bbb-sidebar-content__panel div:not(.bbb-avatar, .bbb-avatar *, #chat-list, .bbb-raised-hands__rank) {
   background-color: transparent;
   background-image: none;
 }
@@ -66,13 +66,13 @@
   color: var(--theme-text) !important;
 }
 
-.bbb-sidebar-content__panel button:not(.bbb-button--primary):not([data-test="sendMessageButton"]):not(:is([data-test="saveSettingsButton"], [data-test="startPoll"], [data-test="confirmEndMeeting"], [data-test="confirmButton"], button:has(+ [data-test="saveSettingsButton"]), [data-test="cancelPollCreation"], [data-test="cancelButton"])) {
+.bbb-sidebar-content__panel button:not(.bbb-button--primary):not(.bbb-chat-form__send):not(.bbb-action-button) {
   background-color: var(--theme-input) !important;
   border-color: var(--theme-input-border) !important;
   color: var(--theme-text) !important;
 }
 
-.bbb-sidebar-content__panel button:not(.bbb-button--primary):not([data-test="sendMessageButton"]):not(:is([data-test="saveSettingsButton"], [data-test="startPoll"], [data-test="confirmEndMeeting"], [data-test="confirmButton"], button:has(+ [data-test="saveSettingsButton"]), [data-test="cancelPollCreation"], [data-test="cancelButton"])):hover {
+.bbb-sidebar-content__panel button:not(.bbb-button--primary):not(.bbb-chat-form__send):not(.bbb-action-button):hover {
   background-color: var(--theme-hover-strong) !important;
 }
 
@@ -162,18 +162,18 @@
   color: var(--theme-text);
 }
 
-.ReactModal__Content button:not(.bbb-button--primary):not([data-test="closeModal"]):not(:is([data-test="saveSettingsButton"], [data-test="startPoll"], [data-test="confirmEndMeeting"], [data-test="confirmButton"], button:has(+ [data-test="saveSettingsButton"]), [data-test="cancelPollCreation"], [data-test="cancelButton"])) {
+.ReactModal__Content button:not(.bbb-button--primary):not(.bbb-modal__close):not(.bbb-action-button) {
   background-color: var(--theme-input) !important;
   border-color: var(--theme-input-border) !important;
   color: var(--theme-text) !important;
 }
 
-.ReactModal__Content [data-test="closeModal"] {
+.ReactModal__Content .bbb-modal__close {
   background: transparent !important;
   color: var(--theme-muted) !important;
 }
 
-.ReactModal__Content [data-test="closeModal"] svg {
+.ReactModal__Content .bbb-modal__close svg {
   filter: invert(.85);
 }
 
@@ -214,17 +214,17 @@
 }
 
 /* Cancel buttons: outlined on the dark surface, not a white box */
-:is(button:has(+ [data-test="saveSettingsButton"]), [data-test="cancelPollCreation"], [data-test="cancelButton"]) {
+.bbb-action-button--secondary {
   background-color: transparent !important;
 }
 
 /* Disabled confirm buttons ("Start poll" before choosing a type) */
-:is([data-test="startPoll"], [data-test="saveSettingsButton"]):disabled {
+.bbb-action-button--primary:disabled {
   background-color: var(--theme-soft) !important;
   border-color: var(--theme-line) !important;
   color: var(--theme-muted) !important;
 }
 
-:is([data-test="startPoll"], [data-test="saveSettingsButton"]):disabled * {
+.bbb-action-button--primary:disabled * {
   color: var(--theme-muted) !important;
 }
