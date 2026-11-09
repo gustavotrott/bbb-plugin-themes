@@ -26,13 +26,17 @@ _Camera images in the screenshots are illustrations. The fonts load from Google 
 
 ## The theme picker
 
-The plugin adds an entry to the client's options menu (the "more options" menu). It opens a dialog with "BigBlueButton default" (the client's own look) and every theme the server offers, each with its name, colours and a short description.
+The plugin adds an entry to the client's options menu (the "more options" menu), called "Theme" ("Design" in German, "Tema" in Spanish and Portuguese, "Thème" in French). It opens a dialog with "BigBlueButton default" (the client's own look) and every theme the server offers, each with its name, colours and a short description. The dialog follows the client's language (English, German, Spanish, French or Brazilian Portuguese, English for the rest) and works with the keyboard: arrow keys pick a theme, Escape closes it.
 
-The choice applies at once. It is saved in the browser (`localStorage`), not on the server, so it holds for every meeting on that server in that browser until the user picks another one. In another browser or on another device the user starts again from the server's default.
+![The theme picker, with the Light theme and in BigBlueButton's dark mode](docs/theme-picker.jpg)
+
+The choice applies at once. It is saved in the browser (`localStorage`), not on the server, so it holds for every meeting on that server in that browser, breakout rooms included, until the user picks another one. In another browser or on another device the user starts again from the server's default. Only the theme id is stored, nothing about the user.
 
 Who sees what: a user who picked a theme sees that one, as long as the server still offers it; everyone else sees the server's `defaultTheme`, and without one the plain BigBlueButton look. With `allowUserChoice: false` there is no picker and everyone sees `defaultTheme`. See [Settings](#settings).
 
 **Dark mode.** BigBlueButton's own dark mode (Settings, "Dark mode") restyles the whole page, and so does a theme, so the two don't mix: while a theme is active, the dark mode is paused, and the dialog says so. "BigBlueButton default" shows the dark mode again. Turning the dark mode on while a light theme is active switches to "BigBlueButton default" (and saves that choice), so the dark mode shows. Midnight and Synthwave stay, since they are dark already, and so does every theme when `allowUserChoice` is `false`. The plugin never changes the dark mode setting itself.
+
+A few parts of the client switch to their dark variant on their own, without the dark mode's stylesheets, so they stay dark while a theme pauses the dark mode: the custom logo (when the server has a separate dark logo), the emoji picker in the chat and the reactions, a few labels and icons, and on phones the colour of the browser bar.
 
 ## Try it without installing
 
@@ -293,7 +297,8 @@ node scripts/site.js               # the GitHub Pages site, into site/ (after bu
 
 | Path | What it holds |
 |---|---|
-| `src/` | The plugin: applies the theme and adds the theme picker |
+| `src/` | The plugin: applies the theme, adds the theme picker and pauses the client's dark mode while a theme is active |
+| `docs/` | Images for this README |
 | `manifest.json` | Plugin manifest |
 | `shared/base.css` | Shared base (layout, icons, accessibility), with every colour and corner as a `--theme-*` variable |
 | `shared/dark.css` | Dark panels, menus, modals and notifications (themes with `"dark": true`: Midnight and Synthwave) |
