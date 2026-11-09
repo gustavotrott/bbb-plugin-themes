@@ -2,15 +2,15 @@
   "compilerOptions": {
     "outDir": "./dist-tsc/",
     "noImplicitAny": true,
-    "module": "es6",
-    "target": "es5",
+    "module": "es2020",
+    "target": "es2018",
+    "lib": ["es2018", "dom"],
     "jsx": "react",
     "allowJs": true,
     "moduleResolution": "node"
   },
   "include": [
-    "shared/**/*",
-    "themes/**/*"
+    "src/**/*"
   ],
   "exclude": [
     "node_modules"

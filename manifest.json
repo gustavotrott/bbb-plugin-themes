@@ -1,0 +1,29 @@
+{
+  "requiredSdkVersion": "^1.0.0-beta.2",
+  "name": "BbbPluginThemes",
+  "version": "0.2.0",
+  "javascriptEntrypointUrl": "BbbPluginThemes.js",
+  "enabledForBreakoutRooms": true,
+  "settingsSchema": [
+    {
+      "name": "defaultTheme",
+      "label": "Default theme: a theme id (the folder name in themes/) or none",
+      "required": false,
+      "defaultValue": "none",
+      "type": "string"
+    },
+    {
+      "name": "themes",
+      "label": "Themes offered in the picker: comma-separated theme ids, empty for all",
+      "required": false,
+      "type": "string"
+    },
+    {
+      "name": "allowUserChoice",
+      "label": "Let each user pick a theme (saved in their browser)",
+      "required": false,
+      "defaultValue": true,
+      "type": "boolean"
+    }
+  ]
+}

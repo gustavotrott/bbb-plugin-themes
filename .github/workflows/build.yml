@@ -1,8 +1,10 @@
 name: Build
 
-# Pushes to main publish every theme on GitHub Pages, so a meeting can load
-# one straight from https://<owner>.github.io/<repo>/<theme>/manifest.json.
-# Tags (v*) attach ready-to-install tarballs to a GitHub release.
+# Pushes to main publish dist/ on GitHub Pages: the plugin with every theme,
+# so a meeting can load it straight from https://<owner>.github.io/<repo>/manifest.json,
+# and each theme as a stylesheet, https://<owner>.github.io/<repo>/<theme>/theme.css.
+# Tags (v*) attach the ready-to-install tarball bbb-plugin-themes.tar.gz to a
+# GitHub release.
 on:
   push:
     branches: [main]
@@ -27,6 +29,16 @@ jobs:
         with:
           node-version: 20
           cache: npm
+      - name: Tag matches the version
+        if: startsWith(github.ref, 'refs/tags/v')
+        run: |
+          for file in package.json manifest.json; do
+            version=$(node -p "require('./$file').version")
+            if [ "v$version" != "$GITHUB_REF_NAME" ]; then
+              echo "::error file=$file::version $version does not match the tag $GITHUB_REF_NAME"
+              exit 1
+            fi
+          done
       - run: npm ci
       - run: npm run build-bundle
       # Until bigbluebutton/bigbluebutton#26415 ships, the stylesheet for 4.0.3
@@ -37,17 +49,17 @@ jobs:
             git worktree add /tmp/bbb-4.0.3 FETCH_HEAD
             node scripts/css.js --root /tmp/bbb-4.0.3 --version 4.0.3
           fi
+      # One tarball with one folder, bbb-plugin-themes/, holding the contents of
+      # dist/: the plugin (BbbPluginThemes.js, manifest.json) and every theme's
+      # stylesheets in <theme>/. Extracted into the plugins folder, it creates or
+      # updates plugins/bbb-plugin-themes/. Only that folder is listed, so there
+      # is no "." entry and extracting never touches the plugins folder itself.
       - name: Package
         run: |
-          mkdir -p release all
-          for dir in dist/*/; do
-            theme=$(basename "$dir")
-            tar czf "release/bbb-plugin-$theme-theme.tar.gz" --owner=0 --group=0 -C "$dir" .
-            cp -R "$dir" "all/bbb-plugin-$theme-theme"
-          done
-          # Folders only, no "." entry, so extracting never touches the plugins folder itself
-          (cd all && tar czf ../release/bbb-plugin-themes.tar.gz --owner=0 --group=0 bbb-plugin-*-theme)
-          ls -l release
+          mkdir -p release package
+          cp -R dist package/bbb-plugin-themes
+          (cd package && tar czf ../release/bbb-plugin-themes.tar.gz --owner=0 --group=0 bbb-plugin-themes)
+          tar tzvf release/bbb-plugin-themes.tar.gz
       - name: Site
         if: github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
         run: node scripts/site.js
@@ -59,7 +71,7 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/v')
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh release create "${{ github.ref_name }}" release/*.tar.gz --title "${{ github.ref_name }}" --generate-notes
+        run: gh release create "${{ github.ref_name }}" release/bbb-plugin-themes.tar.gz --title "${{ github.ref_name }}" --generate-notes
 
   pages:
     if: github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'

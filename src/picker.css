@@ -1,0 +1,354 @@
+/*
+ * Theme picker: the menu icon and the dialog. Injected once and kept with every
+ * theme, also 'none'. The dialog takes the active theme's look from the
+ * --theme-* variables of shared/base.css; the fallbacks are the plain client.
+ * Contrast: text is always --theme-text on --theme-panel. The accent
+ * (--theme-primary) is decoration only, since some themes use a light accent
+ * (Kids orange); the selected row and the focus ring use the text color.
+ *
+ * The sheet has the class "stylus", so the client's dark mode (DarkReader)
+ * does not rewrite it. Its global rules (html, body, input, button...) still
+ * reach the dialog, hence the explicit colors on the dialog's own controls.
+ */
+
+/* Menu icon: Lucide "palette", drawn like the icons in shared/base.css (which is absent with 'none') */
+.icon-bbb-palette::before {
+  content: "" !important;
+  display: block;
+  width: 1em;
+  height: 1em;
+  background-color: currentColor;
+  -webkit-mask: url(../shared/icons/palette.svg) center / contain no-repeat;
+  mask: url(../shared/icons/palette.svg) center / contain no-repeat;
+}
+
+.bbbtp-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  box-sizing: border-box;
+  padding: 1rem;
+  overflow-y: auto;
+  background: rgba(0, 0, 0, .55);
+}
+
+.bbbtp-dialog {
+  --bbbtp-bg: var(--theme-panel-raised, var(--theme-panel, #fff));
+  --bbbtp-text: var(--theme-text, #1f2329);
+  --bbbtp-accent: var(--theme-primary, #0f70d7);
+  --bbbtp-line: var(--theme-input-border, #d5d8dd);
+  --bbbtp-hover: var(--theme-hover-strong, #eef1f5);
+  color-scheme: light;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 46rem;
+  margin: auto;
+  padding: 1.25rem;
+  /* transparent, so it shows in forced colors (Windows high contrast) */
+  border: 1px solid transparent;
+  border-radius: var(--theme-radius-modal, 1rem);
+  background: var(--bbbtp-bg);
+  color: var(--bbbtp-text);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, .35);
+  font-family: var(--theme-font, inherit);
+  font-size: 1rem;
+  line-height: 1.4;
+  text-align: left;
+}
+
+.bbbtp-dialog[data-scheme="dark"] {
+  color-scheme: dark;
+}
+
+/* No theme and the client's dark mode on: the client's dark palette
+   (palette.js: colorOverlaysDarkTheme, colorTextDarkTheme, colorPrimaryDarkTheme) */
+html[data-darkreader-scheme="dark"] .bbbtp-dialog[data-scheme="none"] {
+  --bbbtp-bg: var(--color-overlays-dark-theme, #2d2f38);
+  --bbbtp-text: var(--color-text-dark-theme, #fff);
+  --bbbtp-accent: var(--color-primary-dark-theme, #0f70d7);
+  --bbbtp-line: #5c5f6b;
+  --bbbtp-hover: #3b3e48;
+  color-scheme: dark;
+}
+
+/* Focused only by a click on its text or padding: no ring for that */
+.bbbtp-dialog:focus {
+  outline: none;
+}
+
+.bbbtp-dialog *,
+.bbbtp-dialog *::before,
+.bbbtp-dialog *::after {
+  box-sizing: border-box;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .bbbtp-dialog {
+    animation: bbbtp-in .15s ease-out;
+  }
+}
+
+@keyframes bbbtp-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+.bbbtp-header {
+  display: flex;
+  align-items: flex-start;
+  gap: .75rem;
+}
+
+.bbbtp-dialog .bbbtp-title {
+  flex: 1;
+  margin: .25rem 0 0;
+  color: inherit;
+  font: inherit;
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+/* 44px target. Class pairs beat the generic button rules in shared/base.css */
+.bbbtp-dialog .bbbtp-close {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  margin: -.5rem -.5rem 0 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--theme-radius-sm, 8px) !important;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+.bbbtp-dialog .bbbtp-close:hover {
+  background: var(--bbbtp-hover);
+}
+
+.bbbtp-dialog .bbbtp-close:focus-visible {
+  outline: 2px solid var(--bbbtp-text) !important;
+  outline-offset: 2px !important;
+}
+
+.bbbtp-close svg {
+  width: 1.5rem;
+  height: 1.5rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.bbbtp-dialog .bbbtp-intro {
+  margin: .25rem 0 1rem;
+  color: inherit;
+  font-size: .9375rem;
+}
+
+/* "Dark mode is paused": only there while a theme is active and the dark mode is on */
+.bbbtp-dialog .bbbtp-note {
+  margin: -.5rem 0 1rem;
+  padding: .5rem .75rem;
+  border-left: 3px solid var(--bbbtp-text);
+  background: var(--bbbtp-hover);
+  color: inherit;
+  font-size: .875rem;
+}
+
+.bbbtp-dialog .bbbtp-note:empty {
+  display: none;
+}
+
+.bbbtp-fieldset {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.bbbtp-sr-only {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Two columns when there is room, one on phones and when zoomed in */
+.bbbtp-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(19rem, 100%), 1fr));
+  gap: .5rem;
+}
+
+.bbbtp-dialog .bbbtp-option {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  margin: 0;
+  padding: .625rem .75rem;
+  border: 2px solid var(--bbbtp-line);
+  border-radius: var(--theme-radius-sm, 8px);
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.bbbtp-dialog .bbbtp-option:hover {
+  background: var(--bbbtp-hover);
+}
+
+/* Selected: a strong border in the text color, besides the checked radio */
+.bbbtp-dialog .bbbtp-option:has(:checked) {
+  border-color: var(--bbbtp-text);
+  background: var(--bbbtp-hover);
+}
+
+.bbbtp-dialog .bbbtp-option input {
+  flex: none;
+  width: 1.25rem;
+  height: 1.25rem;
+  margin: 0;
+  background-color: transparent;
+  color: inherit;
+  accent-color: var(--bbbtp-accent);
+  cursor: pointer;
+}
+
+/* Keyboard focus: a ring around the whole row */
+.bbbtp-dialog .bbbtp-option input:focus-visible {
+  outline: 2px solid var(--bbbtp-text);
+  outline-offset: 2px;
+}
+
+@supports selector(:has(*)) {
+  .bbbtp-dialog .bbbtp-option input:focus-visible {
+    outline: none;
+  }
+
+  .bbbtp-dialog .bbbtp-option:has(input:focus-visible) {
+    outline: 2px solid var(--bbbtp-text);
+    outline-offset: 2px;
+  }
+}
+
+.bbbtp-swatch {
+  position: relative;
+  display: block;
+  flex: none;
+  width: 4rem;
+  height: 2.75rem;
+  overflow: hidden;
+  border: 1px solid rgba(128, 128, 128, .5);
+  border-radius: 6px;
+}
+
+.bbbtp-swatch > span {
+  position: absolute;
+  display: block;
+}
+
+/* Colors: --bbbtp-swatch-* per theme, generated from theme.json (swatchCss in Picker.tsx) */
+.bbbtp-swatch {
+  background: var(--bbbtp-swatch-background);
+}
+
+.bbbtp-swatch-nav {
+  background: var(--bbbtp-swatch-nav);
+}
+
+.bbbtp-swatch-button {
+  background: var(--bbbtp-swatch-primary);
+}
+
+.bbbtp-swatch-panel {
+  background: var(--bbbtp-swatch-panel);
+}
+
+.bbbtp-swatch-panel > span {
+  background: var(--bbbtp-swatch-text);
+}
+
+.bbbtp-swatch-nav {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 22%;
+}
+
+.bbbtp-swatch-button {
+  bottom: 12%;
+  left: 32%;
+  width: 18%;
+  height: 16%;
+  border-radius: 99px;
+}
+
+.bbbtp-swatch-panel {
+  top: 12%;
+  right: 8%;
+  bottom: 12%;
+  width: 36%;
+  padding: 12% 10%;
+  border-radius: 3px;
+}
+
+.bbbtp-swatch-panel > span {
+  display: block;
+  height: 2px;
+  margin-bottom: 3px;
+  border-radius: 1px;
+}
+
+.bbbtp-swatch-panel > span + span {
+  width: 60%;
+}
+
+.bbbtp-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.bbbtp-name {
+  font-weight: 700;
+}
+
+.bbbtp-desc {
+  font-size: .875rem;
+}
+
+/* Phones: less padding and a smaller swatch, so the text keeps its room */
+@media (max-width: 30rem) {
+  .bbbtp-overlay {
+    padding: .5rem;
+  }
+
+  .bbbtp-dialog {
+    padding: 1rem;
+  }
+
+  .bbbtp-dialog .bbbtp-option {
+    gap: .5rem;
+    padding: .5rem;
+  }
+
+  .bbbtp-swatch {
+    width: 2.75rem;
+    height: 2rem;
+  }
+}
