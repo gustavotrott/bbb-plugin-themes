@@ -1,0 +1,18 @@
+{
+  "name": "Moodle",
+  "dark": false,
+  "colors": {
+    "background": "#E9ECEF",
+    "nav": "#0F6CBF",
+    "primary": "#0F6CBF",
+    "panel": "#FFFFFF",
+    "text": "#1D2125"
+  },
+  "description": {
+    "en": "The colours, type and shapes of the Moodle Design System.",
+    "de": "Die Farben, Schriften und Formen des Moodle Design Systems.",
+    "es": "Los colores, la tipografía y las formas del Moodle Design System.",
+    "fr": "Les couleurs, la typographie et les formes du Moodle Design System.",
+    "pt-BR": "As cores, a tipografia e as formas do Moodle Design System."
+  }
+}

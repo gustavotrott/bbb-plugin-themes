@@ -1,0 +1,18 @@
+{
+  "name": "Synthwave",
+  "dark": true,
+  "colors": {
+    "background": "#140726",
+    "nav": "#3D0E5F",
+    "primary": "#FF2E97",
+    "panel": "#1B0A33",
+    "text": "#F6E6FF"
+  },
+  "description": {
+    "en": "An 80s sunset, a neon grid floor and pink and cyan glow.",
+    "de": "Ein Sonnenuntergang wie in den 80ern, ein Neon-Gitterboden und pinkes und türkises Leuchten.",
+    "es": "Un atardecer de los 80, un suelo de rejilla de neón y brillo rosa y cian.",
+    "fr": "Un coucher de soleil des années 80, un sol quadrillé néon et des lueurs rose et cyan.",
+    "pt-BR": "Um pôr do sol dos anos 80, um piso quadriculado em neon e brilho rosa e ciano."
+  }
+}

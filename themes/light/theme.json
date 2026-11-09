@@ -1,0 +1,18 @@
+{
+  "name": "Light",
+  "dark": false,
+  "colors": {
+    "background": "#F3F4F7",
+    "nav": "#FFFFFF",
+    "primary": "#5B5FC7",
+    "panel": "#FFFFFF",
+    "text": "#1F2329"
+  },
+  "description": {
+    "en": "Airy and corporate, with an indigo accent, like Teams and Zoom in light mode.",
+    "de": "Hell und sachlich, mit Indigo als Akzent, wie Teams und Zoom im hellen Modus.",
+    "es": "Claro y corporativo, con un acento índigo, como Teams y Zoom en modo claro.",
+    "fr": "Clair et professionnel, avec un accent indigo, comme Teams et Zoom en mode clair.",
+    "pt-BR": "Claro e corporativo, com destaque em índigo, como o Teams e o Zoom no modo claro."
+  }
+}

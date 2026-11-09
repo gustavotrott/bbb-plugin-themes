@@ -1,7 +1,7 @@
 {
   "name": "bbb-plugin-themes",
-  "version": "0.1.1",
-  "description": "Theme plugins for the BigBlueButton 4.0 HTML5 client: Cozy, Kids, Light, Midnight, Synthwave, Moodle and School.",
+  "version": "0.2.0",
+  "description": "One plugin for the BigBlueButton 4.0 HTML5 client with seven themes and a theme picker: Cozy, Kids, Light, Midnight, Synthwave, Moodle and School.",
   "private": true,
   "license": "MIT",
   "scripts": {
@@ -18,7 +18,6 @@
     "@types/react-dom": "^18.2.7",
     "copy-webpack-plugin": "^12.0.2",
     "css-loader": "^6.7.4",
-    "style-loader": "^3.3.3",
     "ts-loader": "^9.4.3",
     "typescript": "^5.1.6",
     "webpack": "^5.83.1",

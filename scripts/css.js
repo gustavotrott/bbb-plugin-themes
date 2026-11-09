@@ -1,8 +1,9 @@
 // Builds each theme as one static stylesheet for BigBlueButton's custom style
 // URL (public.app.customStyleUrl in settings.yml, or userdata-bbb_custom_style_url
-// on /join). Each theme's index.tsx lists its stylesheets in order; they are
-// joined into one file, local images become data URIs and @import rules move
-// to the top.
+// on /join). A theme is a folder in themes/ with a theme.json; its stylesheets,
+// in order, are shared/base.css, shared/dark.css (if "dark" is true) and its
+// own theme.css. They are joined into one file, local images become data URIs
+// and @import rules move to the top.
 //
 //   node scripts/css.js [cozy,kids]    dist/<theme>/theme.css, for the newest BigBlueButton,
 //                                      plus the frozen stylesheets for older versions,
@@ -10,6 +11,11 @@
 //   node scripts/css.js --root <dir> --version 4.0.3
 //                                      builds the checkout in <dir> (another branch) into
 //                                      dist/<theme>/4.0.3/theme.css
+//
+// Checkouts from before theme.json (one plugin per theme) have no theme.json;
+// there each theme's index.tsx imports its stylesheets in order.
+//
+// Only writes files: whatever webpack put in dist/ stays.
 const fs = require('fs');
 const path = require('path');
 
@@ -22,8 +28,10 @@ const opt = (name) => {
 const root = path.resolve(opt('--root') || repo);
 const version = opt('--version');
 const pkg = JSON.parse(fs.readFileSync(path.join(repo, 'package.json'), 'utf8'));
+const has = (theme, file) => fs.existsSync(path.join(root, 'themes', theme, file));
 const all = fs.readdirSync(path.join(root, 'themes'))
-  .filter((t) => fs.existsSync(path.join(root, 'themes', t, 'manifest.json')));
+  .filter((t) => has(t, 'theme.json') || (has(t, 'index.tsx') && has(t, 'manifest.json')))
+  .sort();
 const themes = args[0] ? args[0].split(',') : all;
 
 const MIME = { '.svg': 'image/svg+xml', '.png': 'image/png', '.jpg': 'image/jpeg', '.webp': 'image/webp' };
@@ -38,12 +46,24 @@ function inline(file) {
   });
 }
 
-function build(theme) {
+// The theme's stylesheets, in the order the plugin applies them
+function sheets(theme) {
   const dir = path.join(root, 'themes', theme);
-  const sheets = [...fs.readFileSync(path.join(dir, 'index.tsx'), 'utf8').matchAll(/^import '([^']+\.css)';/gm)]
+  if (has(theme, 'theme.json')) {
+    const { dark } = JSON.parse(fs.readFileSync(path.join(dir, 'theme.json'), 'utf8'));
+    return [
+      path.join(root, 'shared', 'base.css'),
+      ...(dark ? [path.join(root, 'shared', 'dark.css')] : []),
+      path.join(dir, 'theme.css'),
+    ];
+  }
+  return [...fs.readFileSync(path.join(dir, 'index.tsx'), 'utf8').matchAll(/^import '([^']+\.css)';/gm)]
     .map((m) => path.resolve(dir, m[1]));
+}
+
+function build(theme) {
   const imports = [];
-  const body = sheets.map((file) => inline(file).replace(/^@import\b.*;[ \t]*\n?/gm, (rule) => {
+  const body = sheets(theme).map((file) => inline(file).replace(/^@import\b.*;[ \t]*\n?/gm, (rule) => {
     imports.push(rule.trim());
     return '';
   }).trim()).join('\n\n');

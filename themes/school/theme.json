@@ -1,0 +1,18 @@
+{
+  "name": "School",
+  "dark": false,
+  "colors": {
+    "background": "#F7F6F1",
+    "nav": "#1E2A44",
+    "primary": "#3B5BDB",
+    "panel": "#FFFFFF",
+    "text": "#1E2A44"
+  },
+  "description": {
+    "en": "Legible and calm, with every tool in its own colour. For pupils of every age.",
+    "de": "Gut lesbar und ruhig, jedes Werkzeug in seiner eigenen Farbe. Für Schülerinnen und Schüler jeden Alters.",
+    "es": "Legible y tranquilo, cada herramienta con su propio color. Para alumnos de todas las edades.",
+    "fr": "Lisible et calme, chaque outil dans sa propre couleur. Pour les élèves de tous âges.",
+    "pt-BR": "Legível e calmo, cada ferramenta com sua própria cor. Para alunos de todas as idades."
+  }
+}

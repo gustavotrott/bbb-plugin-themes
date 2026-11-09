@@ -1,0 +1,18 @@
+{
+  "name": "Midnight",
+  "dark": true,
+  "colors": {
+    "background": "#0D0F12",
+    "nav": "#15171B",
+    "primary": "#4C7DFF",
+    "panel": "#16181C",
+    "text": "#E6E8EB"
+  },
+  "description": {
+    "en": "The whole client in dark mode, on neutral graphite.",
+    "de": "Der ganze Client im Dunkelmodus, auf neutralem Graphit.",
+    "es": "Todo el cliente en modo oscuro, sobre grafito neutro.",
+    "fr": "Tout le client en mode sombre, sur un graphite neutre.",
+    "pt-BR": "O cliente inteiro no modo escuro, em grafite neutro."
+  }
+}

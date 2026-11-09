@@ -1,6 +1,0 @@
-{
-  "requiredSdkVersion": "^1.0.0-beta.2",
-  "name": "BbbPluginMidnightTheme",
-  "version": "0.1.1",
-  "javascriptEntrypointUrl": "BbbPluginMidnightTheme.js"
-}
