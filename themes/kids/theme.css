@@ -227,7 +227,7 @@ body {
   font-weight: 800 !important;
 }
 
-.bbb-chat-form__input {
+#message-input {
   border-width: 2px !important;
   border-radius: 18px !important;
 }
