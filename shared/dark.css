@@ -228,3 +228,31 @@
 .bbb-action-button--primary:disabled * {
   color: var(--theme-muted) !important;
 }
+
+/* ---- Media sharing panel (screen share, slides, video...) ---- */
+#mediaAreaDropUp {
+  background-color: var(--theme-panel-raised, var(--theme-panel)) !important;
+  color: var(--theme-text) !important;
+}
+
+/* Text and icons outside the option tiles, which keep the client's light tile */
+#mediaAreaDropUp :is(span, p, div, h2, label):not(button, button *, .bbb-button--primary *),
+#mediaAreaDropUp > div > button svg,
+#mediaAreaDropUp > div > div > div > button:has(+ span) svg,
+#mediaAreaDropUp > div:nth-child(2) > div > div:first-child > div i {
+  color: var(--theme-text) !important;
+}
+
+#mediaAreaDropUp > div:nth-child(2) > div > div > button:first-child + div:last-child {
+  color: var(--theme-text) !important;
+}
+
+/* The share button while nothing is selected: not a white slab on the dark panel */
+#mediaAreaDropUp :is([data-test="sharePresentationButton"], [data-test="ShareExternalVideo"]):is(:disabled, [aria-disabled="true"]) {
+  background-color: var(--theme-soft) !important;
+  color: var(--theme-muted) !important;
+}
+
+#mediaAreaDropUp :is([data-test="sharePresentationButton"], [data-test="ShareExternalVideo"]):is(:disabled, [aria-disabled="true"]) * {
+  color: var(--theme-muted) !important;
+}
