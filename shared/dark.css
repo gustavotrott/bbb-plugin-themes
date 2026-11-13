@@ -59,7 +59,6 @@
 }
 
 .bbb-sidebar-content__panel :is(input, textarea, select),
-.bbb-chat-form__input,
 .bbb-user-list__search {
   background-color: var(--theme-input) !important;
   border-color: var(--theme-input-border) !important;
@@ -201,8 +200,7 @@
   color: var(--theme-text) !important;
 }
 
-.bbb-presentation-toolbar button,
-.bbb-presentation-toolbar select {
+.bbb-presentation-toolbar button {
   background-color: transparent !important;
 }
 
@@ -255,4 +253,15 @@
 
 #mediaAreaDropUp :is([data-test="sharePresentationButton"], [data-test="ShareExternalVideo"]):is(:disabled, [aria-disabled="true"]) * {
   color: var(--theme-muted) !important;
+}
+
+/* "Clear all reactions" stays a quiet text action, not a filled dark button */
+#layout .bbb-user-list [data-test="clearAllReactions"] {
+  background-color: transparent !important;
+  color: var(--theme-muted) !important;
+}
+
+#layout .bbb-user-list [data-test="clearAllReactions"]:hover {
+  background-color: var(--theme-hover) !important;
+  color: var(--theme-text) !important;
 }

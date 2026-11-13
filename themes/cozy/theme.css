@@ -181,7 +181,6 @@ body {
 }
 
 /* Inputs: warm white */
-.bbb-chat-form__input,
 .bbb-user-list__search,
 textarea,
 input:not([type="checkbox"]):not([type="radio"]):not([type="range"]) {

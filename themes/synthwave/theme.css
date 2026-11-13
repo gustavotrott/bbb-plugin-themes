@@ -150,7 +150,7 @@ body {
   border-left-color: var(--sw-pink);
 }
 
-.bbb-chat-form__input:focus-within {
+#message-input:focus {
   border-color: var(--sw-cyan) !important;
   box-shadow: 0 0 0 1px var(--sw-cyan), 0 0 14px rgba(45, 226, 230, .4) !important;
 }
