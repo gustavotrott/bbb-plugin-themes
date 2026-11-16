@@ -81,16 +81,16 @@ body {
 }
 
 /* Sidebar: rounded on the right, so it reads as a card lying on the table */
-.bbb-sidebar-content__panel,
-.bbb-sidebar-content__panel > div {
+:is(.bbb-sidebar-content__panel, .bbb-sidebar-content-auxiliary__panel, [data-test="sidebarContentAuxiliary"]),
+:is(.bbb-sidebar-content__panel, .bbb-sidebar-content-auxiliary__panel, [data-test="sidebarContentAuxiliary"]) > div {
   border-radius: 0 22px 22px 0 !important;
 }
 
-.bbb-sidebar-content {
+:is(.bbb-sidebar-content, .bbb-sidebar-content-auxiliary, div:has(> [data-test="sidebarContentAuxiliary"])) {
   background: transparent !important;
 }
 
-.bbb-sidebar-content__panel {
+:is(.bbb-sidebar-content__panel, .bbb-sidebar-content-auxiliary__panel, [data-test="sidebarContentAuxiliary"]) {
   background: var(--theme-panel) !important;
   box-shadow: 4px 0 24px rgba(74, 59, 47, .08) !important;
 }
@@ -198,4 +198,9 @@ button.bbb-connection-status-button.bbb-button--success,
 button.bbb-connection-status-button.bbb-button--success > span.bbb-button__icon {
   background-color: var(--theme-primary) !important;
   border-color: var(--theme-primary) !important;
+}
+
+/* Second panel (multiFunctionalMode): the main panel already draws the edge between the two */
+:is(.bbb-sidebar-content-auxiliary, div:has(> [data-test="sidebarContentAuxiliary"])) {
+  border-left: 0;
 }

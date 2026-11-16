@@ -124,13 +124,13 @@ body {
 }
 
 /* ---- Sidebar: a dark glass panel with a neon edge ---- */
-.bbb-sidebar-content,
-.bbb-sidebar-content__panel,
-.bbb-sidebar-content__panel > div {
+:is(.bbb-sidebar-content, .bbb-sidebar-content-auxiliary, div:has(> [data-test="sidebarContentAuxiliary"])),
+:is(.bbb-sidebar-content__panel, .bbb-sidebar-content-auxiliary__panel, [data-test="sidebarContentAuxiliary"]),
+:is(.bbb-sidebar-content__panel, .bbb-sidebar-content-auxiliary__panel, [data-test="sidebarContentAuxiliary"]) > div {
   background-color: rgba(27, 10, 51, .94) !important;
 }
 
-.bbb-sidebar-content {
+:is(.bbb-sidebar-content, .bbb-sidebar-content-auxiliary, div:has(> [data-test="sidebarContentAuxiliary"])) {
   box-shadow: 1px 0 0 rgba(45, 226, 230, .45), 6px 0 30px rgba(45, 226, 230, .12);
 }
 
@@ -269,4 +269,9 @@ button.bbb-connection-status-button.bbb-button--success > span.bbb-button__icon 
     animation: none !important;
     box-shadow: 0 0 0 2px var(--sw-cyan), 0 0 12px var(--sw-cyan);
   }
+}
+
+/* Second panel (multiFunctionalMode): the main panel already draws the edge between the two */
+:is(.bbb-sidebar-content-auxiliary, div:has(> [data-test="sidebarContentAuxiliary"])) {
+  border-left: 0;
 }

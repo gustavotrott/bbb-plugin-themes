@@ -7,20 +7,20 @@
  */
 
 /* ---- Sidebar panel: text ---- */
-.bbb-sidebar-content__panel,
-.bbb-sidebar-content__panel :is(span, p, div, label, h1, h2, h3, h4, li, strong, em, small, a, legend, th, td):not(.bbb-avatar, .bbb-avatar *, .bbb-button--primary, .bbb-button--primary *) {
+:is(.bbb-sidebar-content__panel, .bbb-sidebar-content-auxiliary__panel, [data-test="sidebarContentAuxiliary"]),
+:is(.bbb-sidebar-content__panel, .bbb-sidebar-content-auxiliary__panel, [data-test="sidebarContentAuxiliary"]) :is(span, p, div, label, h1, h2, h3, h4, li, strong, em, small, a, legend, th, td):not(.bbb-avatar, .bbb-avatar *, .bbb-button--primary, .bbb-button--primary *) {
   color: var(--theme-text) !important;
 }
 
-.bbb-sidebar-content__panel i:not(.bbb-avatar *, .bbb-button--primary *),
-.bbb-sidebar-content__panel [data-test="userNameSubs"],
-.bbb-sidebar-content__panel [data-test="userNameSubs"] *,
-.bbb-sidebar-content__panel [data-test="typingIndicator"],
-.bbb-sidebar-content__panel [data-test="typingIndicator"] * {
+:is(.bbb-sidebar-content__panel, .bbb-sidebar-content-auxiliary__panel, [data-test="sidebarContentAuxiliary"]) i:not(.bbb-avatar *, .bbb-button--primary *),
+:is(.bbb-sidebar-content__panel, .bbb-sidebar-content-auxiliary__panel, [data-test="sidebarContentAuxiliary"]) [data-test="userNameSubs"],
+:is(.bbb-sidebar-content__panel, .bbb-sidebar-content-auxiliary__panel, [data-test="sidebarContentAuxiliary"]) [data-test="userNameSubs"] *,
+:is(.bbb-sidebar-content__panel, .bbb-sidebar-content-auxiliary__panel, [data-test="sidebarContentAuxiliary"]) [data-test="typingIndicator"],
+:is(.bbb-sidebar-content__panel, .bbb-sidebar-content-auxiliary__panel, [data-test="sidebarContentAuxiliary"]) [data-test="typingIndicator"] * {
   color: var(--theme-muted) !important;
 }
 
-.bbb-sidebar-content__panel hr {
+:is(.bbb-sidebar-content__panel, .bbb-sidebar-content-auxiliary__panel, [data-test="sidebarContentAuxiliary"]) hr {
   border-color: var(--theme-line) !important;
   background: var(--theme-line) !important;
 }
@@ -33,24 +33,24 @@
  * gradients) in fixed light colors. No !important, so the explicit surfaces
  * below (bubbles, fields, buttons) still win. Avatars keep their colors.
  */
-.bbb-sidebar-content__panel div:not(.bbb-avatar, .bbb-avatar *, #chat-list, [data-test="raisedHandRank"]) {
+:is(.bbb-sidebar-content__panel, .bbb-sidebar-content-auxiliary__panel, [data-test="sidebarContentAuxiliary"]) div:not(.bbb-avatar, .bbb-avatar *, #chat-list, [data-test="raisedHandRank"]) {
   background-color: transparent;
   background-image: none;
 }
 
-.bbb-sidebar-content,
-.bbb-sidebar-content__panel,
-.bbb-sidebar-content__panel > div,
+:is(.bbb-sidebar-content, .bbb-sidebar-content-auxiliary, div:has(> [data-test="sidebarContentAuxiliary"])),
+:is(.bbb-sidebar-content__panel, .bbb-sidebar-content-auxiliary__panel, [data-test="sidebarContentAuxiliary"]),
+:is(.bbb-sidebar-content__panel, .bbb-sidebar-content-auxiliary__panel, [data-test="sidebarContentAuxiliary"]) > div,
 .bbb-chat-form {
   background-color: var(--theme-panel) !important;
 }
 
-.bbb-sidebar-content__panel .chat-message-content {
+:is(.bbb-sidebar-content__panel, .bbb-sidebar-content-auxiliary__panel, [data-test="sidebarContentAuxiliary"]) .chat-message-content {
   background-color: var(--theme-soft) !important;
 }
 
 /* The bubble has inner boxes with their own light background */
-.bbb-sidebar-content__panel .chat-message-content :is(div, p, span) {
+:is(.bbb-sidebar-content__panel, .bbb-sidebar-content-auxiliary__panel, [data-test="sidebarContentAuxiliary"]) .chat-message-content :is(div, p, span) {
   background-color: transparent !important;
 }
 
@@ -58,35 +58,35 @@
   background-color: var(--theme-own-bubble, var(--theme-hover-strong)) !important;
 }
 
-.bbb-sidebar-content__panel :is(input, textarea, select),
+:is(.bbb-sidebar-content__panel, .bbb-sidebar-content-auxiliary__panel, [data-test="sidebarContentAuxiliary"]) :is(input, textarea, select),
 .bbb-user-list__search {
   background-color: var(--theme-input) !important;
   border-color: var(--theme-input-border) !important;
   color: var(--theme-text) !important;
 }
 
-.bbb-sidebar-content__panel button:not(.bbb-button--primary):not([data-test="sendMessageButton"]):not(:is([data-test="saveSettingsButton"], [data-test="startPoll"], [data-test="confirmEndMeeting"], [data-test="confirmButton"], button:has(+ [data-test="saveSettingsButton"]), [data-test="cancelPollCreation"], [data-test="cancelButton"])) {
+:is(.bbb-sidebar-content__panel, .bbb-sidebar-content-auxiliary__panel, [data-test="sidebarContentAuxiliary"]) button:not(.bbb-button--primary):not([data-test="sendMessageButton"]):not(:is([data-test="saveSettingsButton"], [data-test="startPoll"], [data-test="confirmEndMeeting"], [data-test="confirmButton"], button:has(+ [data-test="saveSettingsButton"]), [data-test="cancelPollCreation"], [data-test="cancelButton"])) {
   background-color: var(--theme-input) !important;
   border-color: var(--theme-input-border) !important;
   color: var(--theme-text) !important;
 }
 
-.bbb-sidebar-content__panel button:not(.bbb-button--primary):not([data-test="sendMessageButton"]):not(:is([data-test="saveSettingsButton"], [data-test="startPoll"], [data-test="confirmEndMeeting"], [data-test="confirmButton"], button:has(+ [data-test="saveSettingsButton"]), [data-test="cancelPollCreation"], [data-test="cancelButton"])):hover {
+:is(.bbb-sidebar-content__panel, .bbb-sidebar-content-auxiliary__panel, [data-test="sidebarContentAuxiliary"]) button:not(.bbb-button--primary):not([data-test="sendMessageButton"]):not(:is([data-test="saveSettingsButton"], [data-test="startPoll"], [data-test="confirmEndMeeting"], [data-test="confirmButton"], button:has(+ [data-test="saveSettingsButton"]), [data-test="cancelPollCreation"], [data-test="cancelButton"])):hover {
   background-color: var(--theme-hover-strong) !important;
 }
 
-.bbb-sidebar-content__panel button:disabled:not(.bbb-button--primary) {
+:is(.bbb-sidebar-content__panel, .bbb-sidebar-content-auxiliary__panel, [data-test="sidebarContentAuxiliary"]) button:disabled:not(.bbb-button--primary) {
   opacity: .5;
 }
 
 /* Poll panel: the blue info box and the selected tab */
-.bbb-sidebar-content--poll [role="tablist"],
-.bbb-sidebar-content--poll div:has(> button[aria-selected]) {
+:is(.bbb-sidebar-content--poll, .bbb-sidebar-content-auxiliary--poll) [role="tablist"],
+:is(.bbb-sidebar-content--poll, .bbb-sidebar-content-auxiliary--poll) div:has(> button[aria-selected]) {
   background-color: var(--theme-input) !important;
   border-color: var(--theme-input-border) !important;
 }
 
-.bbb-sidebar-content--poll div:has(> p):not(:has(button)) {
+:is(.bbb-sidebar-content--poll, .bbb-sidebar-content-auxiliary--poll) div:has(> p):not(:has(button)) {
   background-color: var(--theme-soft) !important;
   border-color: var(--theme-line) !important;
 }
