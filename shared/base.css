@@ -1763,6 +1763,31 @@ select {
   color: var(--theme-stage-text) !important;
 }
 
+/*
+ * "Start recording" (not recording yet): the client draws it for a dark top
+ * bar, white text and a white icon on a 10% white box, so on a light stage it
+ * could not be read. It takes the look of the other buttons of the theme,
+ * with a red dot. While recording the client's red pill stays as it is.
+ */
+.bbb-recording-indicator:not(.bbb-recording-indicator--recording) button {
+  background: var(--theme-button-bg) !important;
+  box-shadow: var(--theme-button-shadow) !important;
+}
+
+.bbb-recording-indicator:not(.bbb-recording-indicator--recording) button,
+.bbb-recording-indicator:not(.bbb-recording-indicator--recording) button * {
+  color: var(--theme-button-icon) !important;
+}
+
+.bbb-recording-indicator:not(.bbb-recording-indicator--recording) button svg circle {
+  stroke: var(--theme-button-icon) !important;
+}
+
+.bbb-recording-indicator:not(.bbb-recording-indicator--recording) button svg circle:last-child {
+  stroke: var(--theme-danger) !important;
+  fill: var(--theme-danger) !important;
+}
+
 .bbb-actions-bar .bbb-button--default > .bbb-button__icon {
   background: var(--theme-button-bg) !important;
   color: var(--theme-button-icon) !important;
