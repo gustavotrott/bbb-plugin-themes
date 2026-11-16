@@ -2,7 +2,7 @@
 
 Seven theme plugins for the BigBlueButton 4.0 HTML5 client. Each one changes colours, shapes, fonts and the background, and keeps the same layout fixes:
 
-- full-height icon bar and sidebar
+- full-height icon bar and sidebar, including the second panel of the multi-functional mode (`multiFunctionalMode`)
 - [Lucide](https://lucide.dev) icons
 - round avatars with a moderator crown and a presenter badge
 - cameras that fill their tile, with a green ring on whoever speaks

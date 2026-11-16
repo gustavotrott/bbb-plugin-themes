@@ -209,7 +209,7 @@ body {
 }
 
 /* ---- Sidebar ---- */
-.bbb-sidebar-content__panel {
+:is(.bbb-sidebar-content__panel, .bbb-sidebar-content-auxiliary__panel, [data-test="sidebarContentAuxiliary"]) {
   background: var(--theme-panel) !important;
 }
 

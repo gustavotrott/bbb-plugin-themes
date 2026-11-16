@@ -138,7 +138,7 @@ body {
 }
 
 /* ---- Sidebar ---- */
-.bbb-sidebar-content {
+:is(.bbb-sidebar-content, .bbb-sidebar-content-auxiliary, div:has(> [data-test="sidebarContentAuxiliary"])) {
   border-right: 1px solid var(--theme-line);
   box-sizing: border-box;
 }
@@ -250,4 +250,9 @@ body {
 .Toastify__toast {
   border: 1px solid var(--theme-line);
   border-left: 6px solid var(--theme-primary) !important;
+}
+
+/* Second panel (multiFunctionalMode): the main panel already draws the edge between the two */
+:is(.bbb-sidebar-content-auxiliary, div:has(> [data-test="sidebarContentAuxiliary"])) {
+  border-left: 0;
 }
