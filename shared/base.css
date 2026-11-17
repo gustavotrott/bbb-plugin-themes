@@ -1352,8 +1352,11 @@ div:has(> .bbb-webcam__name) {
 /*
  * Pinned message: a card with room around it and a soft shadow, instead of a
  * full-width block glued to the header, and text the size of the messages.
+ * Needs the bbb-pinned-message classes (bigbluebutton/bigbluebutton#26415).
+ * The structural selector it replaces (a div:has() followed by "*") made the
+ * browser restyle large subtrees on every DOM change, freezing the whiteboard.
  */
-.bbb-chat div:has(> div:first-child > div > .icon-bbb-pin_filled) {
+.bbb-chat .bbb-pinned-message {
   width: calc(100% - 32px) !important;
   box-sizing: border-box !important;
   margin: 12px 16px 4px !important;
@@ -1363,8 +1366,8 @@ div:has(> .bbb-webcam__name) {
   box-shadow: 0 2px 10px rgba(16, 33, 51, .08) !important;
 }
 
-.bbb-chat div:has(> div:first-child > div > .icon-bbb-pin_filled) > div:nth-child(2),
-.bbb-chat div:has(> div:first-child > div > .icon-bbb-pin_filled) > div:nth-child(2) * {
+.bbb-chat .bbb-pinned-message__content,
+.bbb-chat .bbb-pinned-message__content * {
   font-size: 15px !important;
   line-height: 1.45 !important;
   color: var(--theme-soft-text) !important;
@@ -2208,28 +2211,33 @@ select {
   --color-gray-dark: var(--theme-text);
 }
 
-/* Poll panel: the Poll/Quiz switch and the mode hint follow the theme */
-:is(.bbb-sidebar-content--poll, .bbb-sidebar-content-auxiliary--poll) [role="group"] > button[aria-pressed] {
+/*
+ * Poll panel: the Poll/Quiz switch and the mode hint follow the theme.
+ * Needs the bbb-poll__* classes (bigbluebutton/bigbluebutton#26415). The
+ * structural selector the hint used (div:has() + div:has() p) made the browser
+ * restyle large subtrees on every DOM change, freezing the whiteboard.
+ */
+:is(.bbb-sidebar-content--poll, .bbb-sidebar-content-auxiliary--poll) .bbb-poll__mode {
   border-radius: var(--theme-radius-sm) !important;
 }
 
-:is(.bbb-sidebar-content--poll, .bbb-sidebar-content-auxiliary--poll) [role="group"] > button[aria-pressed="true"] {
+:is(.bbb-sidebar-content--poll, .bbb-sidebar-content-auxiliary--poll) .bbb-poll__mode--active {
   background-color: var(--theme-primary) !important;
   color: var(--theme-on-primary) !important;
 }
 
-:is(.bbb-sidebar-content--poll, .bbb-sidebar-content-auxiliary--poll) [role="group"]:has(> button[aria-pressed]) {
+:is(.bbb-sidebar-content--poll, .bbb-sidebar-content-auxiliary--poll) .bbb-poll__mode-selector {
   border-color: var(--theme-input-border) !important;
   border-radius: var(--theme-radius) !important;
 }
 
-:is(.bbb-sidebar-content--poll, .bbb-sidebar-content-auxiliary--poll) div:has(> [role="group"]) + div:has(> p:only-child) {
+:is(.bbb-sidebar-content--poll, .bbb-sidebar-content-auxiliary--poll) .bbb-poll__info {
   border-color: var(--theme-line) !important;
   border-radius: var(--theme-radius) !important;
   background-color: var(--theme-soft) !important;
 }
 
-:is(.bbb-sidebar-content--poll, .bbb-sidebar-content-auxiliary--poll) div:has(> [role="group"]) + div:has(> p:only-child) p {
+:is(.bbb-sidebar-content--poll, .bbb-sidebar-content-auxiliary--poll) .bbb-poll__info p {
   color: var(--theme-soft-text) !important;
 }
 
