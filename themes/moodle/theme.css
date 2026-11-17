@@ -5,7 +5,9 @@
  * a light gray stage, Noto Sans, 8px corners and the system's soft shadows.
  *
  * Token values: --mds-color-* primitives and the semantic tokens they map to
- * (bg.interactive.primary = blue.500, text.default = gray.900, ...).
+ * (bg.interactive.primary = blue.500, text.default = gray.900, ...), checked
+ * against MDS 5.5 (Moodle 5.3). The system has no shadow tokens; the
+ * --moodle-shadow-* values are Moodle's Boost theme (Bootstrap 5) shadows.
  */
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap");
 
@@ -17,19 +19,30 @@
   --mds-blue-500: #0F6CBF;
   --mds-blue-600: #0C5699;
   --mds-blue-700: #094173;
+  --mds-blue-800: #062B4C;
   --mds-gray-100: #F8F9FA;
   --mds-gray-200: #E9ECEF;
   --mds-gray-300: #DEE2E6;
   --mds-gray-400: #CED4DA;
+  --mds-gray-500: #8F959E;
   --mds-gray-600: #6A737B;
   --mds-gray-700: #495057;
   --mds-gray-900: #1D2125;
   --mds-orange-500: #FF7518;
   --mds-green-500: #357A32;
+  --mds-red-50: #FAEAE9;
+  --mds-red-200: #EAADA6;
   --mds-red-500: #CA3120;
-  --mds-shadow-sm: 0 2px 4px rgba(0, 0, 0, .08);
-  --mds-shadow-md: 0 8px 16px rgba(0, 0, 0, .15);
-  --mds-shadow-lg: 0 16px 48px rgba(0, 0, 0, .17);
+  --mds-red-800: #51140D;
+  --mds-green-50: #EBF2EA;
+  --mds-green-200: #AECAAD;
+  --mds-green-800: #153114;
+  --mds-yellow-50: #FDF7ED;
+  --mds-yellow-200: #F9DEB8;
+  --mds-yellow-800: #60451F;
+  --moodle-shadow-sm: 0 2px 4px rgba(0, 0, 0, .08);
+  --moodle-shadow-md: 0 8px 16px rgba(0, 0, 0, .15);
+  --moodle-shadow-lg: 0 16px 48px rgba(0, 0, 0, .17);
 
   --theme-background: var(--mds-gray-200);
   --theme-stage-text: var(--mds-gray-900);
@@ -44,7 +57,7 @@
   --theme-nav-marker: var(--mds-orange-500);
   --theme-primary: var(--mds-blue-500);
   --theme-primary-soft: rgba(15, 108, 191, .2);
-  --theme-on-primary: #fff;
+  --theme-on-primary: var(--mds-gray-100); /* text.inverse */
   --theme-danger: var(--mds-red-500);
   --theme-moderator: var(--mds-orange-500);
   --theme-talking: #4C9A48;
@@ -61,27 +74,28 @@
   --theme-soft-text: var(--mds-gray-700);
   --theme-scroll: var(--mds-gray-400);
   --theme-badge-ring: #fff;
-  --theme-button-bg: #fff;
-  --theme-button-icon: var(--mds-gray-900);
-  --theme-button-hover: var(--mds-gray-200);
-  --theme-button-shadow: 0 0 0 1px var(--mds-gray-400);
-  --theme-shadow: var(--mds-shadow-md);
+  /* Secondary button: bg.interactive.secondary (filled gray) and text.subtle */
+  --theme-button-bg: var(--mds-gray-300);
+  --theme-button-icon: var(--mds-gray-700);
+  --theme-button-hover: var(--mds-gray-400);
+  --theme-button-shadow: none;
+  --theme-shadow: var(--moodle-shadow-md);
   --theme-font: "Noto Sans", "Helvetica Neue", Arial, sans-serif;
 
-  /* border radius tokens: md 8, sm 6, lg 12 */
+  /* border radius tokens: md 8, sm 6, lg 12; icon-only buttons use xl 16 */
   --theme-radius: 8px;
   --theme-radius-sm: 6px;
   --theme-radius-bubble: 12px;
   --theme-radius-modal: 12px;
   --theme-nav-radius: 8px;
   --theme-action-size: 40px;
-  --theme-action-radius: 8px;
+  --theme-action-radius: 16px;
 }
 
-/* Moodle's focus ring: a solid blue outline that's always visible */
+/* Moodle's focus ring: focus.default, 2px (stroke-weight.md), 1px away (spacing.offset) */
 :is(button, a, [role="button"], [role="menuitem"], [role="tab"]):focus-visible {
-  outline: 3px solid var(--mds-blue-500) !important;
-  outline-offset: 2px !important;
+  outline: 2px solid var(--mds-blue-500) !important;
+  outline-offset: 1px !important;
 }
 
 /* ---- Icon bar: Moodle blue, active item darker with the brand orange mark ---- */
@@ -119,7 +133,7 @@
 
 /* ---- Stage: cards on the gray page ---- */
 .bbb-presentation__content {
-  box-shadow: var(--mds-shadow-sm), 0 0 0 1px var(--mds-gray-300);
+  box-shadow: var(--moodle-shadow-sm), 0 0 0 1px var(--mds-gray-300);
 }
 
 .bbb-presentation-toolbar {
@@ -130,7 +144,7 @@
 .bbb-webcam {
   border-radius: 8px !important;
   overflow: hidden;
-  box-shadow: var(--mds-shadow-sm);
+  box-shadow: var(--moodle-shadow-sm);
 }
 
 .bbb-webcam::after {
@@ -148,20 +162,25 @@
   color: var(--theme-text) !important;
 }
 
-/* ---- Top bar: secondary buttons like Moodle's btn-secondary ---- */
+/* ---- Top bar: icon-only secondary buttons (filled gray, 16px corners) ---- */
 .bbb-navbar__title {
   font-weight: 700 !important;
 }
 
 .bbb-options-button > .bbb-button__icon {
-  border-radius: 6px !important;
+  border-radius: 16px !important;
+  background: var(--theme-button-bg) !important;
   box-shadow: var(--theme-button-shadow);
   color: var(--theme-button-icon) !important;
 }
 
+.bbb-options-button:hover > .bbb-button__icon {
+  background: var(--theme-button-hover) !important;
+}
+
 .bbb-leave-button button.bbb-button--danger,
 button.bbb-connection-status-button > span.bbb-button__icon {
-  border-radius: 6px !important;
+  border-radius: 16px !important;
 }
 
 .bbb-talking-indicator__item {
@@ -198,7 +217,7 @@ button.bbb-connection-status-button > span.bbb-button__icon {
 }
 
 .ReactModal__Content {
-  box-shadow: var(--mds-shadow-lg) !important;
+  box-shadow: var(--moodle-shadow-lg) !important;
 }
 
 .ReactModal__Content > div:first-child > p {
@@ -207,10 +226,42 @@ button.bbb-connection-status-button > span.bbb-button__icon {
   color: var(--mds-gray-900) !important;
 }
 
-/* Alerts like Moodle's: tinted background, coloured left edge */
+/* Notifications like the MDS Alert: tinted background, 1px border, 8px corners */
 .Toastify__toast {
-  border: 1px solid var(--mds-blue-200);
-  border-left: 4px solid var(--mds-blue-500) !important;
+  border: 1px solid var(--mds-blue-200) !important;
+  border-radius: 8px !important;
+  background: var(--mds-blue-50) !important;
+}
+
+.Toastify__toast--success {
+  border-color: var(--mds-green-200) !important;
+  background: var(--mds-green-50) !important;
+}
+
+.Toastify__toast--warning {
+  border-color: var(--mds-yellow-200) !important;
+  background: var(--mds-yellow-50) !important;
+}
+
+.Toastify__toast--error {
+  border-color: var(--mds-red-200) !important;
+  background: var(--mds-red-50) !important;
+}
+
+.Toastify__toast :is(div, span, p) {
+  color: var(--mds-blue-800);
+}
+
+.Toastify__toast--success :is(div, span, p) {
+  color: var(--mds-green-800);
+}
+
+.Toastify__toast--warning :is(div, span, p) {
+  color: var(--mds-yellow-800);
+}
+
+.Toastify__toast--error :is(div, span, p) {
+  color: var(--mds-red-800);
 }
 
 /* Second panel (multiFunctionalMode): the main panel already draws the edge between the two */
